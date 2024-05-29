@@ -13,7 +13,7 @@ import modelo.Personaje;
  *
  * @author Luis
  */
-public class CP_Salame implements Personaje{
+public class CP_Salami implements Personaje{
     
     private double dinero;
 
@@ -23,8 +23,8 @@ public class CP_Salame implements Personaje{
 
     private Map<String, String> dialogos;
 
-    public CP_Salame() {
-        nombre = "C.P Salame";
+    public CP_Salami() {
+        nombre = "C.P Salami";
         this.dialogos = new HashMap<>();
         this.poses = new HashMap<>();
         cargarDialogos();
@@ -34,17 +34,17 @@ public class CP_Salame implements Personaje{
     }
 
     private void cargarDialogos() {
-        dialogos.put("d1", "¡Hola! Soy C.P Salame.");
+        dialogos.put("d1", "¡Hola! Soy C.P Salami.");
         dialogos.put("d2", "¿Como estan muchachos?");
-        dialogos.put("d3", "Todo bien tu sabe.");
+        dialogos.put("d3", "Muy bueno.");
         dialogos.put("d4", "*saca el movil* Ala, esto pa proyectos 9.000");
-        dialogos.put("d5", "¡Con dios y con la virgen!");
+        dialogos.put("d5", "¡Con dios!");
 
     }
 
     private void cargarPoses() {
-        poses.put("p1", "images/salameEmote/poseSalameNormal.png");
-        poses.put("p2", "images/salameEmote/poseSalamePensante.png");
+        poses.put("p1", "images/salamiEmote/poseSalamiNormal.png");
+        poses.put("p2", "images/salamiEmote/poseSalamiPensante.png");
 
     }
 
