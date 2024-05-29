@@ -7,16 +7,14 @@ package personajes;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import modelo.Personaje;
 
 /**
  *
  * @author Luis
- */             
-public class HellerKratos implements Personaje {
-
+ */
+public class CP_Salame implements Personaje{
+    
     private double dinero;
 
     private Map<String, String> poses;
@@ -25,8 +23,8 @@ public class HellerKratos implements Personaje {
 
     private Map<String, String> dialogos;
 
-    public HellerKratos() {
-        nombre = "Heller Kratos";
+    public CP_Salame() {
+        nombre = "C.P Salame";
         this.dialogos = new HashMap<>();
         this.poses = new HashMap<>();
         cargarDialogos();
@@ -36,17 +34,17 @@ public class HellerKratos implements Personaje {
     }
 
     private void cargarDialogos() {
-        dialogos.put("d1", "¡Hola! Soy Heller Kratos.");
-        dialogos.put("d2", "¿Como estais chavales?");
-        dialogos.put("d3", "Vamos subid, que llegamos tarde");
-        dialogos.put("d4", "Wow, que bonitas vistas");
-        dialogos.put("d5", "¡Adios amigos!");
+        dialogos.put("d1", "¡Hola! Soy C.P Salame.");
+        dialogos.put("d2", "¿Como estan muchachos?");
+        dialogos.put("d3", "Todo bien tu sabe.");
+        dialogos.put("d4", "*saca el movil* Ala, esto pa proyectos 9.000");
+        dialogos.put("d5", "¡Con dios y con la virgen!");
 
     }
 
     private void cargarPoses() {
-        poses.put("p1", "images/hellerEmote/poseHellerNormal.png");
-        poses.put("p2", "images/hellerEmote/poseHellerPensante.png");
+        poses.put("p1", "images/salameEmote/poseSalameNormal.png");
+        poses.put("p2", "images/salameEmote/poseSalamePensante.png");
 
     }
 
@@ -81,5 +79,5 @@ public class HellerKratos implements Personaje {
     public double obtenerDinero() {
         return this.dinero;
     }
-
+    
 }

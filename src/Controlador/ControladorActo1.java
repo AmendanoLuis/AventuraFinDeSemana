@@ -25,6 +25,7 @@ public class ControladorActo1 implements PanelHistoriayDecision {
     private ControladorJugador cJugador;
 
     // Personajes
+    private CoversacionesYPoses cP;
     private HellerKratos hk;
     private Maminha maminha;
     private int dialogoActual;
@@ -33,7 +34,7 @@ public class ControladorActo1 implements PanelHistoriayDecision {
     // Contenedores 
     private Label dialogo;
     private ImageView imagenesHistoria;
-    private int imagenActual = 1;
+    private int poseActual = 1;
     private VBox contenedorJuego;
 
     private ImageView imagenesPersonaje;
@@ -76,7 +77,7 @@ public class ControladorActo1 implements PanelHistoriayDecision {
         mostrarDialogo();
 
         // Configura la imagen del personaje con una imagen por defecto
-        establecerImagenPersonaje();
+        establecerPosePersonaje();
     }
 
     private void iniciarEventos() {
@@ -86,24 +87,24 @@ public class ControladorActo1 implements PanelHistoriayDecision {
     }
 
     private void avanzarDialogo() {
-        // Suponiendo que cada personaje tiene 5 diálogos
-        if (dialogoActual <= 5) {  
-            mostrarDialogo();
-            dialogoActual++;
-        } else {
-            cambiarPersonajeMaminha();
-            dialogoActual = 1;
-            mostrarDialogo();
+        mostrarDialogo();
+        dialogoActual++;
+
+        //  Cambiamos Imagen de Historia cuando lleguemos a una parte de 
+        //  la historia/conversacion
+        if (dialogoActual == 3) {
+            cambiarImagenHistoria();
+
+        }
+        if (dialogoActual == 7) {
+            cambiarImagenHistoria();
+
         }
 
-        if (personajeActual instanceof Maminha && dialogoActual == 1) {
-            cambiarImagenHistoria();
-            establecerImagenPersonaje();
-        }
     }
 
     private void mostrarDialogo() {
-        String dialogoTexto = personajeActual.obtenerDialogo("d" + dialogoActual);
+        String dialogoTexto = cP.obtenerDialogoAc1(dialogoActual);
         if (dialogoTexto != null && !dialogoTexto.isEmpty()) {
             dialogo.setText(dialogoTexto);
         } else {
@@ -111,27 +112,20 @@ public class ControladorActo1 implements PanelHistoriayDecision {
         }
     }
 
-    private void cambiarPersonajeMaminha() {
-        if (personajeActual instanceof HellerKratos) {
-            personajeActual = maminha;
-        } else {
-            personajeActual = hk;
-        }
-        establecerImagenPersonaje();
-    }
-
-    private void establecerImagenPersonaje() {
-        // Se elimina la imagen anterior del contenedor
+    private void establecerPosePersonaje() {
         contenedorDialogo.getChildren().remove(imagenesPersonaje);
-        // Se obtiene la imagen del personaje actual
-        String imagenPersonaje = personajeActual.obtenerPose("p1");
+
+        //  Cambiar origen de string
+        String imagenPersonaje = cP.obtenerPosePersonajeAc1(poseActual);
+
         Image imgPersonaje = new Image(imagenPersonaje);
 
         if (imgPersonaje != null) {
             imagenesPersonaje = new ImageView(imgPersonaje);
 
-// Se agrega la nueva imagen al contenedor
             contenedorDialogo.getChildren().add(imagenesPersonaje);
+        } else {
+            System.out.println("La pose para la clave p" + poseActual + " es nulo o vacío");
         }
     }
 
@@ -160,14 +154,14 @@ public class ControladorActo1 implements PanelHistoriayDecision {
 
     @Override
     public void cambiarImagenHistoria() {
-        imagenActual++;
-        String claveImagen = "Imagen " + imagenActual;
+        poseActual++;
+        String claveImagen = "Imagen " + poseActual;
         String pathImagen = vistaActo1.getPathImagen(claveImagen);
         if (pathImagen != null && !pathImagen.isEmpty()) {
             try {
                 Image imgHistoria = new Image(pathImagen);
                 imagenesHistoria.setImage(imgHistoria);
-                imagenActual++;
+                poseActual++;
             } catch (IllegalArgumentException e) {
                 System.err.println("Error al cargar la imagen de la historia: " + e.getMessage());
             }

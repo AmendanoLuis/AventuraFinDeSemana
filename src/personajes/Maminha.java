@@ -17,13 +17,10 @@ import modelo.Personaje;
  */
 public class Maminha implements Personaje {
 
-    private String pathImgMami;
     private double dinero;
 
     private Map<String, String> poses;
 
-    private Image imgMami;
-    private ImageView imagenMami;
     private String nombre;
 
     private Map<String, String> dialogos;
