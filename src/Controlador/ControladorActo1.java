@@ -25,15 +25,14 @@ public class ControladorActo1 implements PanelHistoriayDecision {
     private ControladorJugador cJugador;
 
     // Personajes
-    private HellerKratos hk;
-    private Maminha maminha;
+    private ConversacionesYPoses cConver;
     private int dialogoActual;
-    private Personaje personajeActual;
+    private int poseActual;
+    private int imagenHistoriaActual;
 
     // Contenedores 
     private Label dialogo;
     private ImageView imagenesHistoria;
-    private int imagenActual = 1;
     private VBox contenedorJuego;
 
     private ImageView imagenesPersonaje;
@@ -52,11 +51,12 @@ public class ControladorActo1 implements PanelHistoriayDecision {
     }
 
     private void inicializarComponentes() {
-        hk = new HellerKratos();
-        maminha = new Maminha();
-        personajeActual = hk;
-        dialogoActual = 1;
 
+        cConver = new ConversacionesYPoses();
+        dialogoActual = 1;
+        poseActual = 1;
+        imagenHistoriaActual = 1;
+        
         // Configura botones y contenedores para decisiones
         eleccion1 = new Button("Elección 1");
         eleccion2 = new Button("Elección 2");
@@ -65,18 +65,14 @@ public class ControladorActo1 implements PanelHistoriayDecision {
         contenedorDialogo = new HBox();
         imagenesPersonaje = new ImageView();
 
-        // Configura la primera imagen de la historia
         imagenesHistoria = vistaActo1.getImagenesHistoria();
 
-        // Configura el contenedor de juego
         contenedorJuego = vistaActo1.getContenedorJuego();
 
-        // Configura el diálogo
         dialogo = vistaActo1.getDialogo();
         mostrarDialogo();
 
-        // Configura la imagen del personaje con una imagen por defecto
-        establecerImagenPersonaje();
+        establecerPosePersonaje();
     }
 
     private void iniciarEventos() {
@@ -86,24 +82,30 @@ public class ControladorActo1 implements PanelHistoriayDecision {
     }
 
     private void avanzarDialogo() {
-        // Suponiendo que cada personaje tiene 5 diálogos
-        if (dialogoActual <= 5) {  
-            mostrarDialogo();
-            dialogoActual++;
-        } else {
-            cambiarPersonajeMaminha();
-            dialogoActual = 1;
-            mostrarDialogo();
+        mostrarDialogo();
+        dialogoActual++;
+
+        //  Cambiamos Imagen de Historia cuando lleguemos a x momento
+        if (dialogoActual == 2) {
+            cambiarImagenHistoria();
+
+        }
+        if (dialogoActual == 5) {
+            cambiarImagenHistoria();
+
+        }
+        if (dialogoActual == 7) {
+            cambiarImagenHistoria();
         }
 
-        if (personajeActual instanceof Maminha && dialogoActual == 1) {
-            cambiarImagenHistoria();
-            establecerImagenPersonaje();
+        if (dialogoActual > 9) {
+            vistaActo1.getBtnContinuar().setVisible(true);
         }
+
     }
 
     private void mostrarDialogo() {
-        String dialogoTexto = personajeActual.obtenerDialogo("d" + dialogoActual);
+        String dialogoTexto = cConver.obtenerDialogoAc1(dialogoActual);
         if (dialogoTexto != null && !dialogoTexto.isEmpty()) {
             dialogo.setText(dialogoTexto);
         } else {
@@ -111,27 +113,18 @@ public class ControladorActo1 implements PanelHistoriayDecision {
         }
     }
 
-    private void cambiarPersonajeMaminha() {
-        if (personajeActual instanceof HellerKratos) {
-            personajeActual = maminha;
-        } else {
-            personajeActual = hk;
-        }
-        establecerImagenPersonaje();
-    }
-
-    private void establecerImagenPersonaje() {
-        // Se elimina la imagen anterior del contenedor
+    private void establecerPosePersonaje() {
         contenedorDialogo.getChildren().remove(imagenesPersonaje);
-        // Se obtiene la imagen del personaje actual
-        String imagenPersonaje = personajeActual.obtenerPose("p1");
-        Image imgPersonaje = new Image(imagenPersonaje);
 
+        //  Cambiar origen de string
+        String imagenPersonaje = cConver.obtenerPosePersonajeAc1(poseActual);
+        Image imgPersonaje = new Image(imagenPersonaje);
+        poseActual++;
         if (imgPersonaje != null) {
             imagenesPersonaje = new ImageView(imgPersonaje);
-
-// Se agrega la nueva imagen al contenedor
             contenedorDialogo.getChildren().add(imagenesPersonaje);
+        } else {
+            System.out.println("La pose para la clave p" + imagenHistoriaActual + " es nulo o vacío");
         }
     }
 
@@ -160,14 +153,13 @@ public class ControladorActo1 implements PanelHistoriayDecision {
 
     @Override
     public void cambiarImagenHistoria() {
-        imagenActual++;
-        String claveImagen = "Imagen " + imagenActual;
+        String claveImagen = "Imagen " + imagenHistoriaActual;
         String pathImagen = vistaActo1.getPathImagen(claveImagen);
         if (pathImagen != null && !pathImagen.isEmpty()) {
             try {
                 Image imgHistoria = new Image(pathImagen);
                 imagenesHistoria.setImage(imgHistoria);
-                imagenActual++;
+                imagenHistoriaActual++;
             } catch (IllegalArgumentException e) {
                 System.err.println("Error al cargar la imagen de la historia: " + e.getMessage());
             }

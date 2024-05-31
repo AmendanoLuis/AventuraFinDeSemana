@@ -8,6 +8,6 @@ package vista;
  *
  * @author Luis
  */
-public class VistaActo2 {
+public class VistaEleccionItems {
     
 }

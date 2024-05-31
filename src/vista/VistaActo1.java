@@ -14,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -22,7 +24,6 @@ import javafx.scene.text.FontWeight;
 
 public class VistaActo1 {
 
-    //  Jugador
     private String nJugador;
     private Jugador jugador;
 
@@ -33,19 +34,17 @@ public class VistaActo1 {
     private Label dineroJugador;
     private HBox contenedorStatsJugador;
 
-    //
     private VBox contenedorJuego;
     private Map<String, String> pathImgHistoria;
     private Image imgHistoria;
     private ImageView imagenesHistoria;
 
-    //
     private Label dialogo;
-    private StackPane cImgPj;
+    private StackPane stackImagenPersonaje;
     private Image imgPersonaje;
     private ImageView imagenPersonaje;
+    private Button btnContinuar;
 
-    //
     private Button eleccion1;
     private Button eleccion2;
     private Label preguntaEleccion;
@@ -59,10 +58,12 @@ public class VistaActo1 {
     }
 
     private void inicializarComponentes() {
+
         jugador = Jugador.getInstanciaJugador();
         dJugador = String.valueOf(jugador.getDinero());
         pathImgHistoria = new HashMap<>();
-        cImgPj = new StackPane();
+        stackImagenPersonaje = new StackPane();
+
         // Inicializa y configura los componentes de la interfaz gráfica
         contenedorJuego = new VBox(20);
         actualizarNombreJugador();
@@ -83,7 +84,6 @@ public class VistaActo1 {
         contenedorStatsJugador.setSpacing(10);
         contenedorStatsJugador.setAlignment(Pos.CENTER_RIGHT);
         nombreJugador.setAlignment(Pos.CENTER_LEFT);
-        nombreJugador.setAlignment(Pos.CENTER_LEFT); // Alinea el texto a la izquierda
 
         contenedorStatsJugador.getChildren().addAll(nombreJugador, iconoDineroJugador, dineroJugador);
 
@@ -118,11 +118,26 @@ public class VistaActo1 {
         imagenPersonaje.toFront();
 
         // Agrega la imagen del personaje y el diálogo al StackPane
-        cImgPj.getChildren().add(imagenPersonaje);
-        cImgPj.setAlignment(Pos.BOTTOM_CENTER);
+        stackImagenPersonaje.getChildren().add(imagenPersonaje);
+        stackImagenPersonaje.setAlignment(Pos.BOTTOM_CENTER);
 
-        contenedorDialogo.getChildren().addAll(cImgPj, dialogo);
+        btnContinuar = new Button("Continuar... ");
+        btnContinuar.setStyle("-fx-background-color: #008287; " +
+                      "-fx-border-color: #FFFFFF; " +
+                      "-fx-border-width: 2; " +
+                      "-fx-text-fill: #FFFFFF; " +
+                      "-fx-font-family: 'Times New Roman'; " +
+                      "-fx-font-style: italic; " +
+                      "-fx-font-size: 16px; " +
+                      "-fx-background-radius: 10 10 10 10; " +
+                      "-fx-border-radius: 10 10 10 10;");
+        
 
+        contenedorDialogo.getChildren().addAll(stackImagenPersonaje, dialogo, new Region(), btnContinuar);
+        HBox.setHgrow(new Region(), Priority.ALWAYS);
+        btnContinuar.setAlignment(Pos.CENTER_RIGHT);
+        btnContinuar.setVisible(false);
+        
         //  Cargamos contenedor eleccion
         eleccion1 = new Button("Sierra Nevada");
         eleccion2 = new Button("Cahorros");
@@ -189,6 +204,10 @@ public class VistaActo1 {
 
     public ImageView getImagenesHistoria() {
         return imagenesHistoria;
+    }
+
+    public Button getBtnContinuar() {
+        return btnContinuar;
     }
 
     private void cargarImagenesHistoria() {

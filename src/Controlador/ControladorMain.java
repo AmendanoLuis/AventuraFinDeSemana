@@ -40,6 +40,7 @@ public class ControladorMain {
         this.cJugador = new ControladorJugador();
         this.cInicio = new ControladorInicio();
         this.cElegirNombre = new ControladorElegirNombre();
+        this.cActo1  = new ControladorActo1();
         this.primaryStage = primaryStage;
         this.pBase = new StackPane();
     }
@@ -56,12 +57,13 @@ public class ControladorMain {
     }
 
     private void configurarPantalla() {
-        
+
         pBase.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
         pBase.getChildren().add(cInicio.getVistaInicio().getContenedorJuego());
         pBase.setPadding(new Insets(15, 15, 15, 15));
-        
+
         Scene scene = new Scene(pBase, 850, 600);
+
         primaryStage.setScene(scene);
         primaryStage.setTitle("Aventura de Fin de Semana");
         primaryStage.setResizable(false);
@@ -79,8 +81,10 @@ public class ControladorMain {
         cElegirNombre.getVistaElegirNombre().getBtnAceptarNombre().setOnAction(event -> aceptarNombre());
 
         //  Boton continuar juego
-        cElegirNombre.getVistaElegirNombre().getBtnContinuarJuego().setOnAction(event
-                -> mostrarActo1());
+        cElegirNombre.getVistaElegirNombre().getBtnContinuarJuego().setOnAction(event -> mostrarActo1());
+
+        //  Continuar Eleccion de Items
+        cActo1.getVistaActo1().getBtnContinuar().setOnAction(event -> mostrarEleccionItems());
 
     }
 
@@ -122,6 +126,10 @@ public class ControladorMain {
             showInformationAlert("¡Cuidado!¡No nos has dicho tu nombre!");
 
         }
+
+    }
+
+    private void mostrarEleccionItems() {
 
     }
 
