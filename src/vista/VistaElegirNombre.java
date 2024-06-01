@@ -40,19 +40,9 @@ public class VistaElegirNombre {
     }
 
     private void inicializarPanel() {
-        // Configurar el panel de introducción de nombre
-        VBox contenedorTexto = new VBox(10);
-        contenedorTexto.setPadding(new Insets(-20, 10, 10, 10));
-        contenedorTexto.setAlignment(Pos.CENTER);
         
         
-        Label textoNombre = new Label("Introduce tu nombre");
-        textoNombre.setTextFill(Color.WHITE);
-        nombreField = new TextField();
-        nombreField.setPrefWidth(100);
-        contenedorTexto.getChildren().addAll(textoNombre, nombreField);
-        panelElegirNombre.getChildren().add(contenedorTexto);
-
+        
         // Configurar la imagen
         panelElegirNombre.setSpacing(70);
         panelElegirNombre.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
@@ -65,6 +55,20 @@ public class VistaElegirNombre {
         imagenElegirNombre.setPickOnBounds(true);
         VBox.setVgrow(imagenElegirNombre, Priority.ALWAYS);
         panelElegirNombre.getChildren().add(imagenElegirNombre);
+        
+        // Configurar el panel de introducción de nombre
+        VBox contenedorTexto = new VBox(10);
+        contenedorTexto.setPadding(new Insets(-20, 10, 10, 10));
+        contenedorTexto.setAlignment(Pos.CENTER);
+        
+        Label textoNombre = new Label("Introduce tu nombre");
+        textoNombre.setTextFill(Color.WHITE);
+        nombreField = new TextField();
+                nombreField.setMinSize(100, 20);
+
+        contenedorTexto.getChildren().addAll(textoNombre, nombreField);
+
+        panelElegirNombre.getChildren().add(contenedorTexto);
 
         // Configurar botones
         btnAceptarNombre = new Button("Establecer Nombre");

@@ -40,7 +40,7 @@ public class VistaActo1 {
     private ImageView imagenesHistoria;
 
     private Label dialogo;
-    private StackPane stackImagenPersonaje;
+    private StackPane contImgPersonaje;
     private Image imgPersonaje;
     private ImageView imagenPersonaje;
     private Button btnContinuar;
@@ -62,7 +62,7 @@ public class VistaActo1 {
         jugador = Jugador.getInstanciaJugador();
         dJugador = String.valueOf(jugador.getDinero());
         pathImgHistoria = new HashMap<>();
-        stackImagenPersonaje = new StackPane();
+        contImgPersonaje = new StackPane();
 
         // Inicializa y configura los componentes de la interfaz gráfica
         contenedorJuego = new VBox(20);
@@ -100,11 +100,14 @@ public class VistaActo1 {
 
         //  Dialogo
         dialogo = new Label();
+        dialogo.setMaxWidth(600);
+        dialogo.setWrapText(true);
+
         // Establece el tamaño de fuente y el color del texto
         dialogo.setFont(Font.font(22)); // Tamaño de fuente 22
         dialogo.setTextFill(Color.WHITE); // Color blanco
 
-        contenedorDialogo = new HBox();
+        contenedorDialogo = new HBox(20);
         contenedorDialogo.setAlignment(Pos.CENTER_LEFT);
 
         //  Cargamos contenedor historia y dialogo
@@ -118,26 +121,17 @@ public class VistaActo1 {
         imagenPersonaje.toFront();
 
         // Agrega la imagen del personaje y el diálogo al StackPane
-        stackImagenPersonaje.getChildren().add(imagenPersonaje);
-        stackImagenPersonaje.setAlignment(Pos.BOTTOM_CENTER);
+        contImgPersonaje.getChildren().add(imagenPersonaje);
+        contImgPersonaje.setAlignment(Pos.BOTTOM_CENTER);
 
-        btnContinuar = new Button("Continuar... ");
-        btnContinuar.setStyle("-fx-background-color: #008287; " +
-                      "-fx-border-color: #FFFFFF; " +
-                      "-fx-border-width: 2; " +
-                      "-fx-text-fill: #FFFFFF; " +
-                      "-fx-font-family: 'Times New Roman'; " +
-                      "-fx-font-style: italic; " +
-                      "-fx-font-size: 16px; " +
-                      "-fx-background-radius: 10 10 10 10; " +
-                      "-fx-border-radius: 10 10 10 10;");
-        
+        btnContinuar = new Button("Continuar...");
 
-        contenedorDialogo.getChildren().addAll(stackImagenPersonaje, dialogo, new Region(), btnContinuar);
-        HBox.setHgrow(new Region(), Priority.ALWAYS);
-        btnContinuar.setAlignment(Pos.CENTER_RIGHT);
+// Agregar elementos al contenedor HBox
+        btnContinuar.setAlignment(Pos.CENTER);
+        btnContinuar.toFront();
         btnContinuar.setVisible(false);
-        
+        contenedorDialogo.getChildren().addAll(contImgPersonaje, dialogo, new Region(), btnContinuar);
+
         //  Cargamos contenedor eleccion
         eleccion1 = new Button("Sierra Nevada");
         eleccion2 = new Button("Cahorros");
