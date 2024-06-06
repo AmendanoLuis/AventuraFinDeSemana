@@ -56,7 +56,7 @@ public class ControladorActo1 implements PanelHistoriayDecision {
         dialogoActual = 1;
         poseActual = 1;
         imagenHistoriaActual = 1;
-        
+
         // Configura botones y contenedores para decisiones
         eleccion1 = new Button("Elección 1");
         eleccion2 = new Button("Elección 2");
@@ -76,9 +76,11 @@ public class ControladorActo1 implements PanelHistoriayDecision {
     }
 
     private void iniciarEventos() {
-        contenedorJuego.setOnMouseClicked(event -> avanzarDialogo());
+
+        imagenesHistoria.setOnMouseClicked(event -> avanzarDialogo());
         eleccion1.setOnAction(event -> manejarEleccion(1));
         eleccion2.setOnAction(event -> manejarEleccion(2));
+
     }
 
     private void avanzarDialogo() {

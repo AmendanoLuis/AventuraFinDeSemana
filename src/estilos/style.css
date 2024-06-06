@@ -1,0 +1,159 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+#contenedorJuego {
+    -fx-background-color: #996600; /* Verde oscuro para el fondo */
+}
+
+/* Estilo para el contenedor de información de los items */
+#contInfoItems {
+    -fx-background-color: #324418; /* Verde suave para el fondo */
+    -fx-border-color: black; /* Borde negro */
+    -fx-border-width: 3px; /* Grosor del borde */
+        -fx-font-family: 'Press Start 2P'; /* Fuente pixel */
+
+}
+#descItem {
+    -fx-font-family: 'Press Start 2P'; /* Fuente pixel */
+    -fx-font-size: 12px; /* Tamaño de fuente */
+    -fx-text-fill: white; /* Color de texto blanco */
+    -fx-max-width: 250px; /* Ancho máximo */
+    -fx-wrap-text: true; /* Texto con salto de línea */
+}
+
+/* Estilo para el contenedor de selección de dinero */
+#contDinero {
+    -fx-background-color: #998c00; /* Amarillo verdoso para el fondo */
+    -fx-border-color: black; /* Borde negro */
+    -fx-border-width: 3px; /* Grosor del borde */
+}
+
+/* Estilo para el contenedor de los items */
+#contItems {
+    -fx-background-color: #996600; /* Amarillo pálido para el fondo */
+    -fx-border-color: black; /* Borde negro */
+    -fx-border-width: 3px; /* Grosor del borde */
+}
+
+/* Estilo para el texto "ITEMS" */
+#textItems {
+    -fx-font-family: 'Press Start 2P'; /* Fuente pixel */
+    -fx-font-size: 20px; /* Tamaño de fuente */
+    -fx-font-weight: bold; /* Peso de la fuente */
+    -fx-text-fill: white; /* Letras blancas */
+    -fx-effect: dropshadow(gaussian, rgba(192,192,192,0.5), 5, 0, 2, 2); /* Sombra */
+    -fx-underline: true; /* Subrayado */
+}
+
+/* Estilo para el spinner */
+.spinner {
+    -fx-background-color: #333333; /* Color de fondo blanco */
+    -fx-text-fill: #333333; /* Letras oscuras */
+    -fx-font-size: 16px; /* Tamaño de fuente */
+}
+
+/* Estilo para los checkboxes */
+.checkbox {
+    -fx-text-fill: #333333; /* Letras oscuras */
+}
+
+#cantidadDinero {
+    -fx-font-size: 15px;
+    -fx-text-fill: blue;
+    -fx-background-color: lightgray;
+    -fx-padding: 2px;
+}
+
+#item1 > .box, #item2 > .box {
+    /* Estilos para la caja de verificación */
+    -fx-background-color: lightgray;
+}
+
+#item1{
+    -fx-font-family: 'Press Start 2P'; /* Fuente pixel */
+    -fx-font-size: 16px; /* Tamaño de fuente */
+
+}
+
+#item2{
+    -fx-font-family: 'Press Start 2P'; /* Fuente pixel */
+    -fx-font-size: 16px; /* Tamaño de fuente */
+
+}
+
+#item1 > .box:selected {
+    /* Estilos cuando la caja de verificación con ID "item1" está seleccionada */
+    -fx-background-color: #2d8cf0;
+}
+#item2 > .box:selected {
+    /* Estilos cuando la caja de verificación con ID "item2" está seleccionada */
+    -fx-background-color: #2d8cf0;
+}
+
+
+#contenedorJuego {
+     -fx-border-color: darkgreen, saddlebrown; /* Colores de los bordes */
+    -fx-border-width: 3px, 3px; /* Ancho de los bordes */
+    -fx-border-style: solid; /* Estilo de los bordes */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0, 3, 3); /* Efecto de sombra */
+
+}
+
+
+/*       ESPACIO DE PRUEBAS       */
+
+
+/* Estilo para los botones */
+.button {
+  -fx-font-size: 16px;
+  -fx-background-color: #008542;
+  -fx-text-fill: #fff;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 2, 0, 0, 2);
+  -fx-alignment: center;
+  -fx-border: none;
+  -fx-text-transform: uppercase;
+  -fx-letter-spacing: 1px;
+  -fx-font-weight: 900;
+}
+
+.button:hover {
+  -fx-background-color: #006837; /* Color de fondo más oscuro al pasar el ratón */
+}
+
+.button::before {
+  -fx-position: absolute;
+  -fx-pointer-events: none;
+  -fx-top: 0;
+  -fx-left: 0;
+  -fx-width: 100%;
+  -fx-height: 100%;
+  -fx-content: "";
+  -fx-background-color: #008542 !important;
+  -fx-box-shadow: 0 -4px rgba(21, 108, 0, 0.5) inset, 0 4px rgba(100, 253, 31, 0.99) inset, -4px 0 rgba(100, 253, 31, 0.5) inset, 4px 0 rgba(21, 108, 0, 0.5) inset;
+}
+
+.button::after {
+  -fx-position: absolute;
+  -fx-pointer-events: none;
+  -fx-top: 0;
+  -fx-left: 0;
+  -fx-width: 100%;
+  -fx-height: 100%;
+  -fx-content: "";
+  -fx-box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.15);
+}
+
+.button:hover::before {
+  -fx-box-shadow: 0 -4px rgba(0, 0, 0, 0.5) inset, 0 4px rgba(255, 255, 255, 0.2) inset, -4px 0 rgba(255, 255, 255, 0.2) inset, 4px 0 rgba(0, 0, 0, 0.5) inset;
+}
+
+.button:hover::after {
+  -fx-box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+
+
+
