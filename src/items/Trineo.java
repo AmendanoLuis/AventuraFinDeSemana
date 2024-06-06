@@ -11,19 +11,20 @@ import modelo.Items;
  *
  * @author Luis
  */
-public class GafasSol extends Items {
+public class Trineo extends Items {
 
-      private String pathImage = "images/items/gafasSol.png";
+    private String pathImage = "images/items/trineo.png";
 
-    public GafasSol() {
-        setNombre("Gafas de Sol");
-        setDescripcion("Unas gafas de sol muy chulas.");
+    public Trineo() {
+        setNombre("Trineo");
+        setDescripcion("Un trineo que puedes usar en algún lugar con nieve.");
         setImgItem(new Image(pathImage));
     }
 
     public String getPathImage() {
         return pathImage;
     }
+
 
 
 }

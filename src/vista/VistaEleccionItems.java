@@ -4,6 +4,8 @@
  */
 package vista;
 
+import items.GafasSol;
+import items.Trineo;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.geometry.Insets;
@@ -35,25 +37,34 @@ import javafx.scene.text.Font;
  * @author Luis
  */
 public class VistaEleccionItems {
+    //  Jugador
+
+    private GafasSol gafasSol;
+    private Trineo trineo;
 
     //  Nodos
     private Image item;
     private ImageView imgItem;
     private Label descItem;
-    private Map<String, String> pathImgItem;
+    private Map<String, Image> imagenItem;
     private Spinner<Double> cantidadDinero;
     private Image dinero;
     private ImageView imgDinero;
     private Label textItems;
     private CheckBox item1;
     private CheckBox item2;
+    private Button btnAceptarItems;
+    private Button btnContinuarJuego;
 
     //  Contenedores
     private VBox contInfoItems;
     private VBox contDinero;
+    private StackPane stackImageItem;
     private VBox contItems;
     private HBox contObjetos;
     private HBox contenedorJuego;
+    private VBox contCheckItems;
+    private VBox contBotones;
 
     public VistaEleccionItems() {
         inicializarComponentes();
@@ -73,35 +84,36 @@ public class VistaEleccionItems {
 
     private void inicializarContInfoItems() {
 
-        item = new Image(getClass().getResource("/images/panelEleccionItems/gafasSol.png").toExternalForm());
+        gafasSol = new GafasSol();
+        trineo = new Trineo();
+        imagenItem = new HashMap<>(); 
+        cargarImagenesItems();
+        
+        item = new Image(gafasSol.getPathImage());
         imgItem = new ImageView(item);
         imgItem.setFitWidth(180);
         imgItem.setFitHeight(160);
         imgItem.setPreserveRatio(true);
 
         // Contenedor StackPane, contiene la imagen
-        StackPane imageItem = new StackPane(imgItem);
-        imageItem.setMaxWidth(Region.USE_PREF_SIZE);
+        stackImageItem = new StackPane(imgItem);
+        stackImageItem.setMaxWidth(Region.USE_PREF_SIZE);
 
         // Crear un borde con un color y un ancho específicos
         double anchoBordeItem = 4.0;
         BorderStroke bsItem = new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(anchoBordeItem));
         Border bordeItem = new Border(bsItem);
 
-        imageItem.setBorder(bordeItem);
+        stackImageItem.setBorder(bordeItem);
 
-        descItem = new Label("Unas Gafas de Sol super chulas. "
-                + "Pueden salvar tos ojos de los rayos de sol");
+        descItem = new Label();
         descItem.setId("descItem");
-
-        pathImgItem = new HashMap<>();
-        cargarImagenesItems();
 
         contInfoItems = new VBox(20);  // Espaciado de 10
         contInfoItems.setAlignment(Pos.CENTER);
         contInfoItems.setMinSize(255, 300);
 
-        contInfoItems.getChildren().addAll(imageItem, descItem);
+        contInfoItems.getChildren().addAll(stackImageItem, descItem);
         contInfoItems.setPadding(new Insets(10));
 
         VBox.setVgrow(contInfoItems, Priority.ALWAYS);
@@ -125,7 +137,7 @@ public class VistaEleccionItems {
         contItems = new VBox(50);
         contItems.setAlignment(Pos.CENTER);
 
-        VBox contCheckItems = new VBox(10);
+        contCheckItems = new VBox(10);
         contCheckItems.getChildren().addAll(item1, item2);
         contItems.getChildren().addAll(textItems, contCheckItems);
         contItems.setPadding(new Insets(10, 10, 10, 20));
@@ -134,11 +146,11 @@ public class VistaEleccionItems {
         VBox.setVgrow(contItems, Priority.ALWAYS);
 
         // Crear botones
-        Button btnAceptarItems = new Button("Aceptar Eleccion");
-        Button btnContinuarJuego = new Button("Continuar Juego");
+        btnAceptarItems = new Button("Aceptar Eleccion");
+        btnContinuarJuego = new Button("Continuar Juego");
 
 // Crear VBox para los botones
-        VBox contBotones = new VBox(10); // 10 es el espacio entre los botones
+        contBotones = new VBox(10); // 10 es el espacio entre los botones
         contBotones.setPadding(new Insets(10)); // Establecer un margen alrededor del VBox
         contBotones.setAlignment(Pos.BOTTOM_CENTER);
 
@@ -194,7 +206,6 @@ public class VistaEleccionItems {
         contenedorJuego = new HBox();  // Espaciado de 30
         contenedorJuego.setAlignment(Pos.BOTTOM_CENTER);
         contenedorJuego.getChildren().addAll(contObjetos, contInfoItems);
-        // Código para inicializar los botones
     }
 
     private void asignarIdsCss() {
@@ -216,18 +227,14 @@ public class VistaEleccionItems {
 
     private void cargarImagenesItems() {
 
-        pathImgItem.put("Imagen 1", "images/panelActo1/Acto1_Imagen1.png");
-        pathImgItem.put("Imagen 2", "images/panelActo1/Acto1_Imagen2.png");
-        pathImgItem.put("Imagen 3", "images/panelActo1/Acto1_Imagen3.png");
+        imagenItem.put("Gafas Sol", gafasSol.getImgItem());
+        imagenItem.put("Trineo", trineo.getImgItem());
 
     }
+    
+     private void cargarDescripcionItems() {
 
-    //Controlador
-    private void actualizarItemSeleccionado(ToggleButton selectedButton) {
-        String itemName = selectedButton.getText();
-        String imagePath = pathImgItem.get(itemName);
-        imgItem.setImage(new Image(imagePath));
-        descItem.setText("Descripción del " + itemName);
+      
     }
 
     //  Getter
@@ -239,12 +246,32 @@ public class VistaEleccionItems {
         return descItem;
     }
 
-    public Map<String, String> getPathImgItem() {
-        return pathImgItem;
+    public Map<String, Image> getPathImgItem() {
+        return imagenItem;
     }
 
     public HBox getContenedorJuego() {
         return contenedorJuego;
+    }
+
+    public CheckBox getItem1() {
+        return item1;
+    }
+
+    public CheckBox getItem2() {
+        return item2;
+    }
+
+    public Button getBtnAceptarItems() {
+        return btnAceptarItems;
+    }
+
+    public Button getBtnContinuarJuego() {
+        return btnContinuarJuego;
+    }
+
+    public ImageView getImgItem() {
+        return imgItem;
     }
 
     //  Setters
@@ -259,4 +286,9 @@ public class VistaEleccionItems {
     public void setImgDinero(ImageView imgDinero) {
         this.imgDinero = imgDinero;
     }
+
+    public void setTextItems(Label textItems) {
+        this.textItems = textItems;
+    }
+
 }

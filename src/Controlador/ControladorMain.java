@@ -37,6 +37,12 @@ public class ControladorMain {
     //  Eleccion Items
     private ControladorEleccionItems cItems;
 
+    private String instruccionesHistoria = "Haz click en la imagen para continuar la historia, ve con cuidado, podrias tener elecciones importantes.";
+
+    private String instruccionesEleccionItems = "Elige los items y la cantidad de dinero que creas necesarios."
+            + "\nLee atentamente para que sirven los objetos, te pueden ser muy utiles."
+            + "\nY no te olvides del dinero";
+
     private Stage primaryStage;
     private StackPane pBase;
 
@@ -129,8 +135,8 @@ public class ControladorMain {
 
     //Acto 1
     private void mostrarActo1() {
-        //  Limpiamos Stage y añadimos la vista acto1 que nos proporciona 
-        //  el controlador de acto1
+
+        showInformationAlert(instruccionesHistoria);
 
         if (cJugador.getNombre() != null) {
             this.cActo1 = new ControladorActo1();
@@ -149,6 +155,9 @@ public class ControladorMain {
 
     //  Eleccion Items
     private void mostrarEleccionItems() {
+
+        showInformationAlert(instruccionesEleccionItems);
+
         pBase.getChildren().clear();
         pBase.getChildren().add(cItems.getVistaItems().getContenedorJuego());
 
@@ -160,6 +169,7 @@ public class ControladorMain {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.show();
+
     }
 
     /*
