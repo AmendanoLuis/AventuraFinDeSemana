@@ -215,7 +215,6 @@ public class VistaEleccionItems {
         contDinero.setId("contDinero");
         contItems.setId("contItems");
         contenedorJuego.setId("contenedorJuego");
-        textItems.setId("textItems");
         cantidadDinero.setId("spinnerCantidadDinero");
         item1.setId("checkboxItem1");
         item2.setId("checkboxItem2");
@@ -232,10 +231,7 @@ public class VistaEleccionItems {
 
     }
     
-     private void cargarDescripcionItems() {
-
-      
-    }
+   
 
     //  Getter
     public Spinner<Double> getCantidadDinero() {

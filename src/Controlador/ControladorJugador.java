@@ -26,9 +26,9 @@ public class ControladorJugador {
     }
 
     public void setDinero(double dinero) {
-jugador.setDinero(dinero);
+        jugador.setDinero(dinero);
     }
-    
+
     public void agregarItemJugador(Items item) {
         jugador.añadirItem(item);
     }
@@ -40,12 +40,12 @@ jugador.setDinero(dinero);
     public double getDinero() {
         return jugador.getDinero();
     }
-    
+
     public void agregarDinero(double cantidad) {
         double jDinero = jugador.getDinero();
         if (cantidad > 0) {
             jDinero += cantidad;
-
+            jugador.setDinero(jDinero);
         } else {
             showInformationAlert("No se puede agregar una cantidad negativa.");
         }

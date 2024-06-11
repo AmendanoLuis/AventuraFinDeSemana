@@ -6,6 +6,7 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -43,11 +44,10 @@ public class Jugador {
         return instanciaJugador;
 
     }
-    
-    public void añadirItem(Items i){
+
+    public void añadirItem(Items i) {
         items.add(i);
     }
-    
 
     public String getNombre() {
         return nombre;
@@ -57,14 +57,41 @@ public class Jugador {
         return dinero;
     }
 
-     public void setNombre(String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
     public void setDinero(double dinero) {
         this.dinero = dinero;
     }
-    
+
+    public void agregarDinero(double cantidad) {
+        double jDinero = dinero;
+        if (cantidad > 0) {
+            jDinero += cantidad;
+            dinero = jDinero;
+        } else {
+            showInformationAlert("No se puede agregar una cantidad negativa.");
+        }
+    }
+
+    public void quitarDinero(double cantidad) {
+        double jDinero = dinero;
+
+        if (cantidad > 0) {
+            if (jDinero - cantidad >= 0) {
+                jDinero -= cantidad;
+                dinero = jDinero;
+
+            } else {
+                showInformationAlert("No tienes suficiente dinero.");
+
+            }
+        } else {
+            showInformationAlert("No se puede quitar una cantidad negativa.");
+
+        }
+    }
 
     public ImageView getIconoDineroJugador() {
         return this.iconoDineroJugador;
@@ -74,6 +101,12 @@ public class Jugador {
         return items;
     }
 
-    
+    private void showInformationAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Información");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.show();
+    }
 
 }

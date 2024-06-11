@@ -36,13 +36,45 @@ public class VistaElegirNombre {
         panelElegirNombre = new VBox(20);
         panelAcciones = new HBox(20);
         inicializarPanel();
-        establecerEstilo();
     }
 
     private void inicializarPanel() {
-        
-        
-        
+
+        configurarImagen();
+
+        configurarLabelNombre();
+
+        configurarBotones();
+    }
+
+    private void configurarBotones() {
+        // Configurar botones
+        btnAceptarNombre = new Button("Establecer Nombre");
+        btnContinuarJuego = new Button("Continuar Juego");
+        btnVolverInicio = new Button("Volver al inicio");
+        panelAcciones.getChildren().addAll(btnContinuarJuego, btnAceptarNombre, btnVolverInicio);
+        panelAcciones.setAlignment(Pos.CENTER);
+        panelElegirNombre.setAlignment(Pos.CENTER);
+        panelElegirNombre.getChildren().add(panelAcciones);
+    }
+
+    private void configurarLabelNombre() {
+        // Configurar el panel de introducción de nombre
+        VBox contenedorTexto = new VBox(10);
+        contenedorTexto.setPadding(new Insets(-20, 10, 10, 10));
+        contenedorTexto.setAlignment(Pos.CENTER);
+
+        Label textoNombre = new Label("Introduce tu nombre");
+        textoNombre.setTextFill(Color.WHITE);
+        nombreField = new TextField();
+        nombreField.setMinSize(100, 20);
+
+        contenedorTexto.getChildren().addAll(textoNombre, nombreField);
+
+        panelElegirNombre.getChildren().add(contenedorTexto);
+    }
+
+    private void configurarImagen() {
         // Configurar la imagen
         panelElegirNombre.setSpacing(70);
         panelElegirNombre.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
@@ -53,36 +85,13 @@ public class VistaElegirNombre {
         imagenElegirNombre.setSmooth(true);
         imagenElegirNombre.setCache(true);
         imagenElegirNombre.setPickOnBounds(true);
+
         VBox.setVgrow(imagenElegirNombre, Priority.ALWAYS);
         panelElegirNombre.getChildren().add(imagenElegirNombre);
-        
-        // Configurar el panel de introducción de nombre
-        VBox contenedorTexto = new VBox(10);
-        contenedorTexto.setPadding(new Insets(-20, 10, 10, 10));
-        contenedorTexto.setAlignment(Pos.CENTER);
-        
-        Label textoNombre = new Label("Introduce tu nombre");
-        textoNombre.setTextFill(Color.WHITE);
-        nombreField = new TextField();
-                nombreField.setMinSize(100, 20);
 
-        contenedorTexto.getChildren().addAll(textoNombre, nombreField);
-
-        panelElegirNombre.getChildren().add(contenedorTexto);
-
-        // Configurar botones
-        btnAceptarNombre = new Button("Establecer Nombre");
-        btnContinuarJuego = new Button("Continuar Juego");
-        btnVolverInicio = new Button("Volver al inicio");
-        panelAcciones.getChildren().addAll(btnContinuarJuego,btnAceptarNombre, btnVolverInicio);
-        panelAcciones.setAlignment(Pos.CENTER);
-        panelElegirNombre.setAlignment(Pos.CENTER);
-        panelElegirNombre.getChildren().add(panelAcciones);
     }
 
-    private void establecerEstilo() {
-        // Aquí puedes establecer estilos adicionales si es necesario
-    }
+  
 
     public VBox getContenedorJuego() {
         return panelElegirNombre;
@@ -91,8 +100,6 @@ public class VistaElegirNombre {
     public ImageView getImagenElegirNombre() {
         return imagenElegirNombre;
     }
-
-   
 
     public Button getBtnVolverInicio() {
         return btnVolverInicio;
@@ -109,7 +116,5 @@ public class VistaElegirNombre {
     public Button getBtnContinuarJuego() {
         return btnContinuarJuego;
     }
-    
-    
-    
+
 }

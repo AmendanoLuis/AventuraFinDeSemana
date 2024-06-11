@@ -68,13 +68,6 @@ public class VistaActo1 {
         contenedorJuego = new VBox(20);
         actualizarNombreJugador();
 
-        // Nombre Jugador
-        nJugador = jugador.getNombre();
-        nombreJugador = new Label(nJugador);
-        nombreJugador.setMaxWidth(Double.MAX_VALUE); // El ancho del Label se expandirá al máximo
-        nombreJugador.setTextFill(Color.WHITE); // Establece el color del texto
-        nombreJugador.setFont(Font.font("Arial", FontWeight.BOLD, 16));
-
         //  Dinero Jugador
         iconoDineroJugador = jugador.getIconoDineroJugador();
         actualizarDineroJugador();
@@ -148,7 +141,7 @@ public class VistaActo1 {
 
     private void actualizarNombreJugador() {
         nJugador = jugador.getNombre();
-        nombreJugador = new Label("Jugador: " + nJugador);
+        nombreJugador = new Label( nJugador);
         nombreJugador.setMaxWidth(Double.MAX_VALUE);
         nombreJugador.setTextFill(Color.WHITE);
         nombreJugador.setFont(Font.font("Arial", FontWeight.BOLD, 16));
@@ -202,6 +195,10 @@ public class VistaActo1 {
 
     public Button getBtnContinuar() {
         return btnContinuar;
+    }
+
+    public ImageView getImagenPersonaje() {
+        return imagenPersonaje;
     }
 
     private void cargarImagenesHistoria() {

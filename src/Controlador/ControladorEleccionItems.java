@@ -26,8 +26,6 @@ import vista.VistaEleccionItems;
  */
 public class ControladorEleccionItems {
 
-    //  Jugador
-    private Jugador jugador = Jugador.getInstanciaJugador();
     private GafasSol gafasSol;
     private Trineo trineo;
 
@@ -49,7 +47,6 @@ public class ControladorEleccionItems {
         this.vistaItems = new VistaEleccionItems();
         inicializarComponentes();
         iniciarEventos();
-
 
     }
 
@@ -83,6 +80,7 @@ public class ControladorEleccionItems {
     }
 
     private void guardarItemsJugador() {
+        Jugador jugador = Jugador.getInstanciaJugador();
 
         String mensaje = "Items: ";
 
@@ -91,7 +89,7 @@ public class ControladorEleccionItems {
 
         //  Dinero
         double dineroJ = cantDinero.getValue();
-        jugador.setDinero(dineroJ);
+        jugador.agregarDinero(dineroJ);
 
         if (item1.isSelected()) {
             mensaje = mensaje + ' ' + nGafas + ", " ;
@@ -156,6 +154,20 @@ public class ControladorEleccionItems {
         return vistaItems;
     }
 
+    public HBox getContenedorJuego() {
+        return contenedorJuego;
+    }
+
+    public Button getBtnAceptarItems() {
+        return btnAceptarItems;
+    }
+
+    public Button getBtnContinuarJuego() {
+        return btnContinuarJuego;
+    }
+
+    
+    
     private void showInformationAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Información");

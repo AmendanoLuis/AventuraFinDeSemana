@@ -13,8 +13,9 @@ import modelo.Personaje;
  *
  * @author Luis
  */
-public class CP_Salami implements Personaje {
-
+public class MariaTrueno implements Personaje {
+    
+    
     private double dinero;
 
     private Map<String, String> poses;
@@ -23,8 +24,8 @@ public class CP_Salami implements Personaje {
 
     private Map<String, String> dialogos;
 
-    public CP_Salami() {
-        nombre = "C.P Salami";
+    public MariaTrueno() {
+        nombre = "Maria Trueno";
         this.dialogos = new HashMap<>();
         this.poses = new HashMap<>();
         cargarDialogos();
@@ -34,7 +35,7 @@ public class CP_Salami implements Personaje {
     }
 
     private void cargarDialogos() {
-        dialogos.put("d1", "¡Hola! Soy C.P Salami.");
+        dialogos.put("d1", "¡Hola! Soy Maria Trueno");
         dialogos.put("d2", "¿Como estan muchachos?");
         dialogos.put("d3", "Muy bueno.");
         dialogos.put("d4", "*saca el movil* Ala, esto pa proyectos 9.000");
@@ -43,9 +44,9 @@ public class CP_Salami implements Personaje {
     }
 
     private void cargarPoses() {
-        poses.put("p1", "images/salamiEmote/salamiNormal.png");
-        poses.put("p2", "images/salamiEmote/salamiJocoso.png");
-        poses.put("p3", "images/salamiEmote/salamiSorprendido.png");
+        poses.put("p1", "images/truenoEmote/truenoNormal.png");
+        poses.put("p2", "images/truenoEmote/truenoPensante.png");
+        poses.put("p3", "images/truenoEmote/truenoVacilon.png");
 
     }
 
@@ -81,4 +82,6 @@ public class CP_Salami implements Personaje {
         return this.dinero;
     }
 
+    
+    
 }

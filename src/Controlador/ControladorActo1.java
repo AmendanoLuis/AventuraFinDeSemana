@@ -63,7 +63,7 @@ public class ControladorActo1 implements PanelHistoriayDecision {
         preguntaEleccion = new Label("¿Qué decisión tomarás?");
         contenedorBotonEleccion = new HBox(eleccion1, eleccion2);
         contenedorDialogo = new HBox();
-        imagenesPersonaje = new ImageView();
+        imagenesPersonaje = vistaActo1.getImagenPersonaje();
 
         imagenesHistoria = vistaActo1.getImagenesHistoria();
 
@@ -72,7 +72,6 @@ public class ControladorActo1 implements PanelHistoriayDecision {
         dialogo = vistaActo1.getDialogo();
         mostrarDialogo();
 
-        establecerPosePersonaje();
     }
 
     private void iniciarEventos() {
@@ -84,8 +83,12 @@ public class ControladorActo1 implements PanelHistoriayDecision {
     }
 
     private void avanzarDialogo() {
+
         mostrarDialogo();
         dialogoActual++;
+
+        avanzarPosePersonaje();
+        poseActual++;
 
         //  Cambiamos Imagen de Historia cuando lleguemos a x momento
         if (dialogoActual == 2) {
@@ -115,19 +118,21 @@ public class ControladorActo1 implements PanelHistoriayDecision {
         }
     }
 
-    private void establecerPosePersonaje() {
-        contenedorDialogo.getChildren().remove(imagenesPersonaje);
+    private void avanzarPosePersonaje() {
 
-        //  Cambiar origen de string
-        String imagenPersonaje = cConver.obtenerPosePersonajeAc1(poseActual);
-        Image imgPersonaje = new Image(imagenPersonaje);
-        poseActual++;
-        if (imgPersonaje != null) {
-            imagenesPersonaje = new ImageView(imgPersonaje);
-            contenedorDialogo.getChildren().add(imagenesPersonaje);
-        } else {
-            System.out.println("La pose para la clave p" + imagenHistoriaActual + " es nulo o vacío");
+        try {
+            //  Cambiar origen de string
+            String imagenPersonaje = cConver.obtenerPosePersonajeAc1(poseActual);
+            Image imgPersonaje = new Image(imagenPersonaje);
+            if (imgPersonaje != null) {
+                imagenesPersonaje.setImage(imgPersonaje);
+            } else {
+                System.out.println("La pose para la clave p" + imagenHistoriaActual + " es nulo o vacío");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e);
         }
+
     }
 
     @Override

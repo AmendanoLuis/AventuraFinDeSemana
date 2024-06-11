@@ -1,1 +1,33 @@
-/dist/
+# NetBeans specific files and folders
+nbproject/private/
+nbproject/Makefile-impl.mk
+nbproject/Makefile-variables.mk
+nbproject/Package-private.properties
+nbproject/configs/
+
+# Build and distribution directories
+build/
+dist/
+
+# Compiled files
+*.class
+
+# IDE configuration files
+*.iml
+.idea/
+.vscode/
+
+# Operating system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Version control files
+.svn/
+.hg/
+.bzr/
+
+# Logs and temporary files
+*.log
+tmp/
