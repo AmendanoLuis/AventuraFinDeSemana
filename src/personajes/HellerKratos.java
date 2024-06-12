@@ -45,8 +45,8 @@ public class HellerKratos implements Personaje {
     }
 
     private void cargarPoses() {
-        poses.put("p1", "images/hellerEmote/poseHellerNormal.png");
-        poses.put("p2", "images/hellerEmote/poseHellerPensante.png");
+        poses.put("p1", "resources/poseHellerNormal.png");
+        poses.put("p2", "resources/poseHellerPensante.png");
 
     }
 

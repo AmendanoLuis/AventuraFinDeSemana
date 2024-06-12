@@ -13,7 +13,7 @@ import modelo.Items;
  */
 public class Trineo extends Items {
 
-    private String pathImage = "images/items/trineo.png";
+    private String pathImage = "resources/trineo.png";
 
     public Trineo() {
         setNombre("Trineo");

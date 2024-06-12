@@ -13,7 +13,7 @@ import modelo.Items;
  */
 public class GafasSol extends Items {
 
-      private String pathImage = "images/items/gafasSol.png";
+      private String pathImage = "resources/gafasSol.png";
 
     public GafasSol() {
         setNombre("Gafas de Sol");
