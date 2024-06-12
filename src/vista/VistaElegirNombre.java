@@ -78,7 +78,7 @@ public class VistaElegirNombre {
         // Configurar la imagen
         panelElegirNombre.setSpacing(70);
         panelElegirNombre.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
-        imagenElegirNombre = new ImageView(new Image("images/panelElegirNombre/elegirNombre.png"));
+        imagenElegirNombre = new ImageView(new Image("resources/elegirNombre.png"));
         imagenElegirNombre.setFitWidth(650);
         imagenElegirNombre.setFitHeight(350);
         imagenElegirNombre.setPreserveRatio(true);

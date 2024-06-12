@@ -44,9 +44,9 @@ public class MariaTrueno implements Personaje {
     }
 
     private void cargarPoses() {
-        poses.put("p1", "images/truenoEmote/truenoNormal.png");
-        poses.put("p2", "images/truenoEmote/truenoPensante.png");
-        poses.put("p3", "images/truenoEmote/truenoVacilon.png");
+        poses.put("p1", "resources/truenoNormal.png");
+        poses.put("p2", "resources/truenoPensante.png");
+        poses.put("p3", "resources/truenoVacilon.png");
 
     }
 

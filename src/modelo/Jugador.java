@@ -25,7 +25,7 @@ public class Jugador {
     private List<Items> items;
 
     private Jugador() {
-        imgDineroJugador = new Image("images/jugador/iconoDinero.png");
+        imgDineroJugador = new Image("resources/iconoDinero.png");
         iconoDineroJugador = new ImageView(imgDineroJugador);
         items = new ArrayList();
         //  Altura

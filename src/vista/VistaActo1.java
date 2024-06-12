@@ -53,67 +53,68 @@ public class VistaActo1 {
 
     public VistaActo1() {
         inicializarComponentes();
-        cargarImagenesHistoria();
 
     }
 
     private void inicializarComponentes() {
 
         jugador = Jugador.getInstanciaJugador();
-        dJugador = String.valueOf(jugador.getDinero());
+
         pathImgHistoria = new HashMap<>();
+
+        dialogo = new Label();
+
         contImgPersonaje = new StackPane();
 
-        // Inicializa y configura los componentes de la interfaz gráfica
+        contenedorStatsJugador = new HBox(10);
+
         contenedorJuego = new VBox(20);
+
+        contenedorDialogo = new HBox(20);
+
+        contenedorBotonEleccion = new HBox();
+
         actualizarNombreJugador();
 
-        //  Dinero Jugador
-        iconoDineroJugador = jugador.getIconoDineroJugador();
         actualizarDineroJugador();
 
-        //  Contenedor Stats Jugador
-        contenedorStatsJugador = new HBox(10);
-        contenedorStatsJugador.setSpacing(10);
-        contenedorStatsJugador.setAlignment(Pos.CENTER_RIGHT);
-        nombreJugador.setAlignment(Pos.CENTER_LEFT);
+        cargarStatsJugador();
 
-        contenedorStatsJugador.getChildren().addAll(nombreJugador, iconoDineroJugador, dineroJugador);
-
-        //  Cargamos nuestra primera imagen como base, despues la cambiaremos
-        //  en el controlador si lo necesitamos
         cargarImagenesHistoria();
-        imgHistoria = new Image(getPathImagen("Imagen 1"));
-        imagenesHistoria = new ImageView(imgHistoria);
 
-        //  Altura imagen
-        imagenesHistoria.setFitHeight(350);
-        // Ancho imagen
-        imagenesHistoria.setFitWidth(600);
+        cargarContenedorDialogo();
 
-        //  Dialogo
-        dialogo = new Label();
+        cargarContenedorEleccion();
+
+        contenedorJuego.setPadding(new Insets(-20, 10, 10, 10));
+        contenedorJuego.setAlignment(Pos.CENTER);
+        contenedorJuego.getChildren().addAll(contenedorStatsJugador, imagenesHistoria, contenedorDialogo);
+    }
+
+    private void cargarContenedorEleccion() {
+        eleccion1 = new Button("Sierra Nevada");
+        eleccion2 = new Button("Cahorros");
+        preguntaEleccion = new Label("¿Dónde quieres viajar?");
+        contenedorBotonEleccion.setAlignment(Pos.CENTER);
+        contenedorBotonEleccion.getChildren().addAll(eleccion1, eleccion2);
+    }
+
+    private void cargarContenedorDialogo() {
         dialogo.setMaxWidth(600);
         dialogo.setWrapText(true);
 
-        // Establece el tamaño de fuente y el color del texto
-        dialogo.setFont(Font.font(22)); // Tamaño de fuente 22
-        dialogo.setTextFill(Color.WHITE); // Color blanco
+        dialogo.setFont(Font.font(22));
+        dialogo.setTextFill(Color.WHITE);
 
-        contenedorDialogo = new HBox(20);
         contenedorDialogo.setAlignment(Pos.CENTER_LEFT);
 
-        //  Cargamos contenedor historia y dialogo
-        imgPersonaje = new Image("images/hellerEmote/poseHellerNormal.png");
+        imgPersonaje = null;
         imagenPersonaje = new ImageView(imgPersonaje);
 
-        // Ajusta la altura y el ancho de la imagen
-        imagenPersonaje.setFitWidth(70); // ajusta el ancho de la imagen a 50 píxeles
-        imagenPersonaje.setFitHeight(130); // ajusta la altura de la imagen a 50 píxeles
-        // Establece la posición Z del ImageView para asegurarse de que esté al frente
+        imagenPersonaje.setFitWidth(70);
+        imagenPersonaje.setFitHeight(130);
         imagenPersonaje.toFront();
 
-        // Agrega la imagen del personaje y el diálogo al StackPane
         contImgPersonaje.getChildren().add(imagenPersonaje);
         contImgPersonaje.setAlignment(Pos.BOTTOM_CENTER);
 
@@ -124,30 +125,27 @@ public class VistaActo1 {
         btnContinuar.toFront();
         btnContinuar.setVisible(false);
         contenedorDialogo.getChildren().addAll(contImgPersonaje, dialogo, new Region(), btnContinuar);
+    }
 
-        //  Cargamos contenedor eleccion
-        eleccion1 = new Button("Sierra Nevada");
-        eleccion2 = new Button("Cahorros");
-        preguntaEleccion = new Label("¿Dónde quieres viajar?");
-        contenedorBotonEleccion = new HBox();
-        contenedorBotonEleccion.setAlignment(Pos.CENTER);
-        contenedorBotonEleccion.getChildren().addAll(eleccion1, eleccion2);
+    private void cargarStatsJugador() {
+        contenedorStatsJugador.setSpacing(10);
+        contenedorStatsJugador.setAlignment(Pos.CENTER_RIGHT);
+        nombreJugador.setAlignment(Pos.CENTER_LEFT);
 
-        //  Cargamos configuracion base de acto1
-        contenedorJuego.setPadding(new Insets(-20, 10, 10, 10));
-        contenedorJuego.setAlignment(Pos.CENTER);
-        contenedorJuego.getChildren().addAll(contenedorStatsJugador, imagenesHistoria, contenedorDialogo);
+        contenedorStatsJugador.getChildren().addAll(nombreJugador, iconoDineroJugador, dineroJugador);
     }
 
     private void actualizarNombreJugador() {
         nJugador = jugador.getNombre();
-        nombreJugador = new Label( nJugador);
+        nombreJugador = new Label(nJugador);
         nombreJugador.setMaxWidth(Double.MAX_VALUE);
         nombreJugador.setTextFill(Color.WHITE);
         nombreJugador.setFont(Font.font("Arial", FontWeight.BOLD, 16));
     }
 
     private void actualizarDineroJugador() {
+        iconoDineroJugador = jugador.getIconoDineroJugador();
+
         dJugador = String.valueOf(jugador.getDinero());
         dineroJugador = new Label(dJugador + "$");
         dineroJugador.setTextFill(Color.WHITE);
@@ -203,9 +201,15 @@ public class VistaActo1 {
 
     private void cargarImagenesHistoria() {
 
-        pathImgHistoria.put("Imagen 1", "images/panelActo1/Acto1_Imagen1.png");
-        pathImgHistoria.put("Imagen 2", "images/panelActo1/Acto1_Imagen2.png");
-        pathImgHistoria.put("Imagen 3", "images/panelActo1/Acto1_Imagen3.png");
+        pathImgHistoria.put("Imagen 1", "resources/Acto1_Imagen1.png");
+        pathImgHistoria.put("Imagen 2", "resources/Acto1_Imagen2.png");
+        pathImgHistoria.put("Imagen 3", "resources/Acto1_Imagen3.png");
+
+        imgHistoria = new Image(getPathImagen("Imagen 1"));
+        imagenesHistoria = new ImageView(imgHistoria);
+
+        imagenesHistoria.setFitHeight(350);
+        imagenesHistoria.setFitWidth(600);
 
     }
 

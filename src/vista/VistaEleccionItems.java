@@ -167,7 +167,7 @@ public class VistaEleccionItems {
 
         cantidadDinero = new Spinner<>();
 
-        dinero = new Image(getClass().getResource("/images/panelEleccionItems/dinero.png").toExternalForm());
+        dinero = new Image("resources/dinero.png");
 
         imgDinero = new ImageView(dinero);
         imgDinero.setFitHeight(150);

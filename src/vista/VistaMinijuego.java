@@ -62,12 +62,12 @@ public class VistaMinijuego {
     private void iniciarImagenes() {
 
         //  Iniciar imagenes
-        imagenCarretera = new Image("images/panelMinijuego/carreteraFondo.png");
+        imagenCarretera = new Image("resources/carreteraFondo.png");
         carreteraFondo = new ImageView(imagenCarretera);
         carreteraFondo.setFitWidth(850);
         carreteraFondo.setFitHeight(600);
 
-        imagenCoche = new Image("images/panelMinijuego/coche.png");
+        imagenCoche = new Image("resources/coche.png");
         coche = new ImageView(imagenCoche);
 
         //  Tamaño coche
@@ -96,6 +96,7 @@ public class VistaMinijuego {
         iconoDineroJugador = jugador.getIconoDineroJugador();
 
         contenedorStatsJugador = new HBox(10);
+        contenedorStatsJugador.setPadding(new Insets(10));
         contenedorStatsJugador.setSpacing(10);
         contenedorStatsJugador.setAlignment(Pos.CENTER_RIGHT);
         nombreJugador.setAlignment(Pos.CENTER_LEFT);

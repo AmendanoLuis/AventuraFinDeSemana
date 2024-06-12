@@ -20,16 +20,44 @@ public class VistaInicio {
     private Text autor;
 
     public VistaInicio() {
-        pInicio = new VBox(20);
-        pInicio.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 
-        establecerPanel();
+        iniciarComponentes();
     }
 
-    private void establecerPanel() {
-        // Establecer imagen
-        String path = "images/icono/LOGOTIPO.png";
+    private void iniciarComponentes() {
+        pInicio = new VBox(20);
+        pInicio.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
+        
+        cargarLogotipo();
+
+        cargarBotonIniciarJuego();
+
+        pInicio.getChildren().add(imagenInicio);
+
+        pInicio.getChildren().add(btnInicio);
+
+        cargarAutorJuego();
+
+        pInicio.getChildren().add(autor);
+
+        pInicio.setAlignment(Pos.CENTER);
+    }
+
+    private void cargarAutorJuego() {
+        autor = new Text("Created by Luis Augusto");
+        autor.setFill(Color.GREEN);
+        autor.setTextAlignment(TextAlignment.LEFT);
+        
+        VBox.setMargin(autor, new Insets(0, 0, 20, 0));
+    }
+
+    private void cargarLogotipo() {
+        String path = "resources/LOGOTIPO.png";
         Image icono = new Image(path);
+        imagenInicio = new ImageView(icono);
+    }
+
+    private void cargarBotonIniciarJuego() {
         btnInicio = new Button("Inicio");
         btnInicio.setStyle(
                 "-fx-background-color: #c2fbd7; "
@@ -49,24 +77,6 @@ public class VistaInicio {
                 + "-webkit-user-select: none; "
                 + "-fx-touch-action: manipulation;"
         );
-
-        imagenInicio = new ImageView(icono);
-        pInicio.getChildren().add(imagenInicio);
-
-        //  Añadimos boton
-        pInicio.getChildren().add(btnInicio);
-
-        // Establecer autor con alineación abajo a la izquierda
-        autor = new Text("Created by Luis Augusto");
-        autor.setFill(Color.GREEN);
-        autor.setTextAlignment(TextAlignment.LEFT);
-        // Agregamos un margen inferior de 20 para bajar el texto
-        VBox.setMargin(autor, new Insets(0, 0, 20, 0));
-
-        pInicio.getChildren().add(autor);
-
-        // Ajustar la alineación del VBox
-        pInicio.setAlignment(Pos.CENTER);
     }
 
     public VBox getContenedorJuego() {

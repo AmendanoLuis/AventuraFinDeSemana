@@ -44,8 +44,8 @@ public class Maminha implements Personaje {
     }
 
     private void cargarPoses() {
-        poses.put("p1", "images/maminhaEmote/poseMaminhaNormal.png");
-        poses.put("p2", "images/maminhaEmote/poseMaminhaPensante.png");
+        poses.put("p1", "resources/poseMaminhaNormal.png");
+        poses.put("p2", "resources/poseMaminhaPensante.png");
 
     }
 

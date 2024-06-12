@@ -43,9 +43,9 @@ public class CP_Salami implements Personaje {
     }
 
     private void cargarPoses() {
-        poses.put("p1", "images/salamiEmote/salamiNormal.png");
-        poses.put("p2", "images/salamiEmote/salamiJocoso.png");
-        poses.put("p3", "images/salamiEmote/salamiSorprendido.png");
+        poses.put("p1", "resources/salamiNormal.png");
+        poses.put("p2", "resources/salamiJocoso.png");
+        poses.put("p3", "resources/salamiSorprendido.png");
 
     }
 
