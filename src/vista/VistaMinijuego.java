@@ -18,17 +18,29 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import modelo.Jugador;
 import personajes.MariaTrueno;
+import lombok.*;
+import modelo.Alerta;
 
 /**
  *
  * @author Luis
  */
+@Data
 public class VistaMinijuego {
 
     private Image imagenCarretera;
     private ImageView carreteraFondo;
     private Image imagenCoche;
     private ImageView coche;
+
+    private Image imgJuegoPerdidoSn;
+    private Image imgJuegoPerdidoCh;
+
+    private Image imgPausaSn;
+    private Image imgPausaCh;
+
+    private Image imgJuegoGanadoSn;
+    private Image imgJuegoGanadoCh;
 
     private String nJugador;
 
@@ -49,6 +61,9 @@ public class VistaMinijuego {
     private Button btnParar;
     private StackPane cBoton;
 
+    private StackPane cBotonTerminarMinijuego;
+    private Button btnJuegoTerminado;
+
     private Pane contenedorJuego;
 
     public VistaMinijuego() {
@@ -56,10 +71,15 @@ public class VistaMinijuego {
         iniciarImagenes();
         iniciarStatsJugador();
         cargarControlJuego();
+        cargarAlerta();
+        diseñoAlerta();
+
         asignarId();
     }
 
     private void iniciarImagenes() {
+
+        cargarImagenesAlerta(1);
 
         //  Iniciar imagenes
         imagenCarretera = new Image("resources/carreteraFondo.png");
@@ -80,6 +100,22 @@ public class VistaMinijuego {
         coche.setLayoutX(0);
         coche.setLayoutY(350);
 
+    }
+
+    public void cargarImagenesAlerta(int i) {
+
+        if (i == 1) {
+
+            imgJuegoPerdidoCh = new Image("resources/juegoPerdido.png");
+            imgPausaCh = new Image("resources/fotoEsperaSierraNevada.png");
+            imgJuegoGanadoCh = new Image("resources/juegoGanadoCahorros.png");
+
+        } else if (i == 0) {
+            imgJuegoPerdidoSn = new Image("resources/juegoPerdido.png");
+            imgJuegoGanadoSn = new Image("resources/juegoGanadoSierraNevada.png");
+            imgPausaSn = new Image("resources/fotoEsperaSierraNevada.png");
+
+        }
     }
 
     private void iniciarStatsJugador() {
@@ -146,7 +182,8 @@ public class VistaMinijuego {
         cControlJuego = new StackPane();
         panelControlJuego = new HBox(20);
         panelControlJuego.setPadding(new Insets(5));
-        panelControlJuego.setMinSize(795, 110);
+        panelControlJuego.setMinSize(810, 110);
+        panelControlJuego.setMaxSize(840, 110);
 
         panelControlJuego.getChildren().addAll(personaje, dialogo, cBoton);
         btnParar.setAlignment(Pos.CENTER_RIGHT);
@@ -157,39 +194,30 @@ public class VistaMinijuego {
 
     }
 
+    private void cargarAlerta() {
+
+        this.cBotonTerminarMinijuego = new StackPane();
+        this.btnJuegoTerminado = new Button("Salir del coche");
+    }
+
+    private void diseñoAlerta() {
+        cBotonTerminarMinijuego.getChildren().add(btnJuegoTerminado);
+        contenedorJuego.getChildren().add(cBotonTerminarMinijuego);
+        cBotonTerminarMinijuego.setLayoutX(100);
+        cBotonTerminarMinijuego.setLayoutY(520);
+        cBotonTerminarMinijuego.setVisible(false);
+    }
+
     private void asignarId() {
         panelControlJuego.setId("panelControlJuego");
         cBoton.setId("contenedor");
         btnParar.setId("btnParar");
         dialogo.setId("dialogo");
-    }
 
-    public ImageView getCarreteraFondo() {
-        return carreteraFondo;
-    }
+        contenedorStatsJugador.setId("statsJugador");
+        nombreJugador.setId("nombreJugador");
+        dineroJugador.setId("dineroJugador");
 
-    public ImageView getCoche() {
-        return coche;
-    }
-
-    public Pane getContenedorJuego() {
-        return contenedorJuego;
-    }
-
-    public MariaTrueno getMt() {
-        return mariaTrueno;
-    }
-
-    public ImageView getPersonaje() {
-        return personaje;
-    }
-
-    public Label getDialogo() {
-        return dialogo;
-    }
-
-    public Button getBtnParar() {
-        return btnParar;
     }
 
     public Image getImgPersonajeP1() {

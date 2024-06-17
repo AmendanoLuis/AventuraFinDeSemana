@@ -1,19 +1,103 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+@font-face {
+    font-family: 'SAVE';
+    src: url('save.otf');
+}
+
+@font-face {
+    font-family: 'Determination Extended';
+    src: url('determination-extended.ttf');
+}
+
+
+
+/*ALERTAS JUEGO*/
+
+#tituloAlerta{
+    -fx-font-family: 'SAVE';
+    -fx-font-size: 21px;
+    -fx-text-fill: whitesmoke;
+    -fx-effect: dropshadow(gaussian, rgba(192,192,192,0.5), 5, 0, 2, 2);
+
+}
+
+#separador {
+    -fx-background-color: white;
+    -fx-padding: 0px;
+}
+
+#infoAlerta{
+    -fx-font-family: 'Determination Extended';
+    -fx-font-size: 9px;
+    -fx-text-fill: white;
+}
+
+
+
+#vAlerta{
+    -fx-background-color: black;
+    -fx-alignment: center;
+    -fx-border-color: white;
+    -fx-border-width: 4px;
+}
+
+#contenedorAlerta{
+    -fx-background-color: black;
+    -fx-alignment: center;
+}
+
+/*JUGADOR*/
+
+#statsJugadorHistoria{
+    -fx-font-family: 'Determination Extended';
+    -fx-text-fill: white;
+    -fx-font-size: 7px;
+
+}
+#statsJugador{
+    -fx-font-family: 'Determination Extended';
+    -fx-text-fill: white;
+    -fx-font-size: 7px;
+    -fx-background-color: BLACK;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+
+}
+
+#nombreJugador{
+    -fx-text-fill: white;
+
+}
+
+#dineroJugador{
+    -fx-text-fill: white;
+
+}
+
+/*JUEGO*/
+
+#pBase{
+    -fx-background-color: black;
+}
+
 #contenedorJuego {
     -fx-background-color: #996600;
 }
 
+
+
+/*Eleccion items*/
 #contInfoItems {
     -fx-background-color: #324418;
     -fx-border-color: black;
     -fx-border-width: 3px;
-    -fx-font-family: 'Press Start 2P';
+    -fx-font-family: 'SAVE';
 }
 
 #descItem {
-    -fx-font-family: 'Press Start 2P';
-    -fx-font-size: 12px;
+    -fx-font-family: 'Determination Extended';
+    -fx-font-size: 10px;
     -fx-text-fill: white;
     -fx-max-width: 250px;
     -fx-wrap-text: true;
@@ -32,12 +116,11 @@
 }
 
 #textItems {
-    -fx-font-family: 'Press Start 2P';
+    -fx-font-family: 'SAVE';
     -fx-font-size: 20px;
     -fx-font-weight: bold;
     -fx-text-fill: white;
     -fx-effect: dropshadow(gaussian, rgba(192,192,192,0.5), 5, 0, 2, 2);
-    -fx-underline: true;
 }
 
 .spinner {
@@ -62,12 +145,12 @@
 }
 
 #item1{
-    -fx-font-family: 'Press Start 2P';
+    -fx-font-family: 'SAVE';
     -fx-font-size: 16px;
 }
 
 #item2{
-    -fx-font-family: 'Press Start 2P';
+    -fx-font-family: 'SAVE';
     -fx-font-size: 16px;
 }
 
@@ -144,10 +227,18 @@
 }
 
 #dialogo {
-    -fx-font-family: 'Press Start 2P';
+    -fx-font-family: 'Determination Extended';
     -fx-text-fill: white;
-    -fx-font-size: 14px;
-        -fx-wrap-text: true; 
+    -fx-font-size: 9px;
+    -fx-wrap-text: true;
+
+}
+
+#preguntaDecision{
+    -fx-font-family: 'SAVE';
+    -fx-font-size: 13px;
+    -fx-text-fill: whitesmoke;
+    -fx-effect: dropshadow(gaussian, rgba(192,192,192,0.5), 5, 0, 2, 2);
 
 }
 
@@ -177,4 +268,30 @@
     -fx-effect: null;
     -fx-translate-y: 0.2em;
 }
+
+/* Menu Sierra Nevada */
+
+#panelDialogoSierraNevada {
+    -fx-background-color: black;
+    -fx-border-color: white;
+    -fx-border-width: 9px;
+    -fx-border-style: solid;
+}
+
+#dialogoSierraNevada{
+    -fx-background-color: black;
+    -fx-font-family: 'Determination Extended';
+    -fx-text-fill: white;
+    -fx-font-size: 9px;
+    -fx-wrap-text: true;
+}
+#textPaseo,#textViaje,#textRest {
+    -fx-background-color: black;
+    -fx-font-family: 'SAVE';
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-wrap-text: true;
+
+}
+
 

@@ -9,17 +9,23 @@ import java.util.List;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import lombok.*;
 
 /**
  *
  * @author Luis
  */
+@Data
 public class Jugador {
 
     private static Jugador instanciaJugador;
 
     private String nombre;
     private double dinero = 7.50;
+
+    private boolean sierraNevada = false;
+    private boolean cahorros = false;
+
     private Image imgDineroJugador;
     private ImageView iconoDineroJugador;
     private List<Items> items;
@@ -27,6 +33,11 @@ public class Jugador {
     private Jugador() {
         imgDineroJugador = new Image("resources/iconoDinero.png");
         iconoDineroJugador = new ImageView(imgDineroJugador);
+        
+        iconoDineroJugador.setFitHeight(20);
+        iconoDineroJugador.setFitWidth(20);
+        
+        
         items = new ArrayList();
         //  Altura
         iconoDineroJugador.setFitHeight(40);
@@ -47,22 +58,6 @@ public class Jugador {
 
     public void añadirItem(Items i) {
         items.add(i);
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public double getDinero() {
-        return dinero;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setDinero(double dinero) {
-        this.dinero = dinero;
     }
 
     public void agregarDinero(double cantidad) {
@@ -99,6 +94,15 @@ public class Jugador {
 
     public List<Items> getItems() {
         return items;
+    }
+
+    public void seleccionarCahorros() {
+        this.cahorros = true;
+    }
+
+    public void seleccionarSierraNevada() {
+        this.sierraNevada = true;
+
     }
 
     private void showInformationAlert(String message) {

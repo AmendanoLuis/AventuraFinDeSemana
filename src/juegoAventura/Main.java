@@ -4,7 +4,7 @@
  */
 package juegoAventura;
 
-import controlador.ControladorMain;
+import Controlador.ControladorMain;
 import javafx.application.Application;
 
 import javafx.stage.Stage;

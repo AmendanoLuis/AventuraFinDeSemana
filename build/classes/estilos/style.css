@@ -1,60 +1,136 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+@font-face {
+    font-family: 'SAVE';
+    src: url('save.otf');
+}
+
+@font-face {
+    font-family: 'Determination Extended';
+    src: url('determination-extended.ttf');
+}
+
+
+
+/*ALERTAS JUEGO*/
+
+#tituloAlerta{
+    -fx-font-family: 'SAVE';
+    -fx-font-size: 21px;
+    -fx-text-fill: whitesmoke;
+    -fx-effect: dropshadow(gaussian, rgba(192,192,192,0.5), 5, 0, 2, 2);
+
+}
+
+#separador {
+    -fx-background-color: white;
+    -fx-padding: 0px;
+}
+
+#infoAlerta{
+    -fx-font-family: 'Determination Extended';
+    -fx-font-size: 9px;
+    -fx-text-fill: white;
+}
+
+
+
+#vAlerta{
+    -fx-background-color: black;
+    -fx-alignment: center;
+    -fx-border-color: white;
+    -fx-border-width: 4px;
+}
+
+#contenedorAlerta{
+    -fx-background-color: black;
+    -fx-alignment: center;
+}
+
+/*JUGADOR*/
+
+#statsJugadorHistoria{
+    -fx-font-family: 'Determination Extended';
+    -fx-text-fill: white;
+    -fx-font-size: 7px;
+
+}
+#statsJugador{
+    -fx-font-family: 'Determination Extended';
+    -fx-text-fill: white;
+    -fx-font-size: 7px;
+    -fx-background-color: BLACK;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+
+}
+
+#nombreJugador{
+    -fx-text-fill: white;
+
+}
+
+#dineroJugador{
+    -fx-text-fill: white;
+
+}
+
+/*JUEGO*/
+
+#pBase{
+    -fx-background-color: black;
+}
+
 #contenedorJuego {
-    -fx-background-color: #996600; /* Verde oscuro para el fondo */
+    -fx-background-color: #996600;
 }
 
-/* Estilo para el contenedor de información de los items */
+
+
+/*Eleccion items*/
 #contInfoItems {
-    -fx-background-color: #324418; /* Verde suave para el fondo */
-    -fx-border-color: black; /* Borde negro */
-    -fx-border-width: 3px; /* Grosor del borde */
-        -fx-font-family: 'Press Start 2P'; /* Fuente pixel */
-
+    -fx-background-color: #324418;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+    -fx-font-family: 'SAVE';
 }
+
 #descItem {
-    -fx-font-family: 'Press Start 2P'; /* Fuente pixel */
-    -fx-font-size: 12px; /* Tamaño de fuente */
-    -fx-text-fill: white; /* Color de texto blanco */
-    -fx-max-width: 250px; /* Ancho máximo */
-    -fx-wrap-text: true; /* Texto con salto de línea */
+    -fx-font-family: 'Determination Extended';
+    -fx-font-size: 10px;
+    -fx-text-fill: white;
+    -fx-max-width: 250px;
+    -fx-wrap-text: true;
 }
 
-/* Estilo para el contenedor de selección de dinero */
 #contDinero {
-    -fx-background-color: #998c00; /* Amarillo verdoso para el fondo */
-    -fx-border-color: black; /* Borde negro */
-    -fx-border-width: 3px; /* Grosor del borde */
+    -fx-background-color: #998c00;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
 }
 
-/* Estilo para el contenedor de los items */
 #contItems {
-    -fx-background-color: #996600; /* Amarillo pálido para el fondo */
-    -fx-border-color: black; /* Borde negro */
-    -fx-border-width: 3px; /* Grosor del borde */
+    -fx-background-color: #996600;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
 }
 
-/* Estilo para el texto "ITEMS" */
 #textItems {
-    -fx-font-family: 'Press Start 2P'; /* Fuente pixel */
-    -fx-font-size: 20px; /* Tamaño de fuente */
-    -fx-font-weight: bold; /* Peso de la fuente */
-    -fx-text-fill: white; /* Letras blancas */
-    -fx-effect: dropshadow(gaussian, rgba(192,192,192,0.5), 5, 0, 2, 2); /* Sombra */
-    -fx-underline: true; /* Subrayado */
+    -fx-font-family: 'SAVE';
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(192,192,192,0.5), 5, 0, 2, 2);
 }
 
-/* Estilo para el spinner */
 .spinner {
-    -fx-background-color: #333333; /* Color de fondo blanco */
-    -fx-text-fill: #333333; /* Letras oscuras */
-    -fx-font-size: 16px; /* Tamaño de fuente */
+    -fx-background-color: #333333;
+    -fx-text-fill: #333333;
+    -fx-font-size: 16px;
 }
 
-/* Estilo para los checkboxes */
 .checkbox {
-    -fx-text-fill: #333333; /* Letras oscuras */
+    -fx-text-fill: #333333;
 }
 
 #cantidadDinero {
@@ -65,95 +141,157 @@
 }
 
 #item1 > .box, #item2 > .box {
-    /* Estilos para la caja de verificación */
     -fx-background-color: lightgray;
 }
 
 #item1{
-    -fx-font-family: 'Press Start 2P'; /* Fuente pixel */
-    -fx-font-size: 16px; /* Tamaño de fuente */
-
+    -fx-font-family: 'SAVE';
+    -fx-font-size: 16px;
 }
 
 #item2{
-    -fx-font-family: 'Press Start 2P'; /* Fuente pixel */
-    -fx-font-size: 16px; /* Tamaño de fuente */
-
+    -fx-font-family: 'SAVE';
+    -fx-font-size: 16px;
 }
 
 #item1 > .box:selected {
-    /* Estilos cuando la caja de verificación con ID "item1" está seleccionada */
-    -fx-background-color: #2d8cf0;
-}
-#item2 > .box:selected {
-    /* Estilos cuando la caja de verificación con ID "item2" está seleccionada */
     -fx-background-color: #2d8cf0;
 }
 
+#item2 > .box:selected {
+    -fx-background-color: #2d8cf0;
+}
 
 #contenedorJuego {
-     -fx-border-color: darkgreen, saddlebrown; /* Colores de los bordes */
-    -fx-border-width: 3px, 3px; /* Ancho de los bordes */
-    -fx-border-style: solid; /* Estilo de los bordes */
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0, 3, 3); /* Efecto de sombra */
-
+    -fx-border-color: darkgreen, saddlebrown;
+    -fx-border-width: 3px, 3px;
+    -fx-border-style: solid;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0, 3, 3);
 }
 
-
-/*       ESPACIO DE PRUEBAS       */
-
-
-/* Estilo para los botones */
 .button {
-  -fx-font-size: 16px;
-  -fx-background-color: #008542;
-  -fx-text-fill: #fff;
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 2, 0, 0, 2);
-  -fx-alignment: center;
-  -fx-border: none;
-  -fx-text-transform: uppercase;
-  -fx-letter-spacing: 1px;
-  -fx-font-weight: 900;
+    -fx-font-size: 16px;
+    -fx-background-color: #008542;
+    -fx-text-fill: #fff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 2, 0, 0, 2);
+    -fx-alignment: center;
+    -fx-border: none;
+    -fx-text-transform: uppercase;
+    -fx-letter-spacing: 1px;
+    -fx-font-weight: 900;
 }
 
 .button:hover {
-  -fx-background-color: #006837; /* Color de fondo más oscuro al pasar el ratón */
+    -fx-background-color: #006837;
 }
 
 .button::before {
-  -fx-position: absolute;
-  -fx-pointer-events: none;
-  -fx-top: 0;
-  -fx-left: 0;
-  -fx-width: 100%;
-  -fx-height: 100%;
-  -fx-content: "";
-  -fx-background-color: #008542 !important;
-  -fx-box-shadow: 0 -4px rgba(21, 108, 0, 0.5) inset, 0 4px rgba(100, 253, 31, 0.99) inset, -4px 0 rgba(100, 253, 31, 0.5) inset, 4px 0 rgba(21, 108, 0, 0.5) inset;
+    -fx-position: absolute;
+    -fx-pointer-events: none;
+    -fx-top: 0;
+    -fx-left: 0;
+    -fx-width: 100%;
+    -fx-height: 100%;
+    -fx-content: "";
+    -fx-background-color: #008542 !important;
+    -fx-box-shadow: 0 -4px rgba(21, 108, 0, 0.5) inset, 0 4px rgba(100, 253, 31, 0.99) inset, -4px 0 rgba(100, 253, 31, 0.5) inset, 4px 0 rgba(21, 108, 0, 0.5) inset;
 }
 
 .button::after {
-  -fx-position: absolute;
-  -fx-pointer-events: none;
-  -fx-top: 0;
-  -fx-left: 0;
-  -fx-width: 100%;
-  -fx-height: 100%;
-  -fx-content: "";
-  -fx-box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.15);
+    -fx-position: absolute;
+    -fx-pointer-events: none;
+    -fx-top: 0;
+    -fx-left: 0;
+    -fx-width: 100%;
+    -fx-height: 100%;
+    -fx-content: "";
+    -fx-box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.15);
 }
 
 .button:hover::before {
-  -fx-box-shadow: 0 -4px rgba(0, 0, 0, 0.5) inset, 0 4px rgba(255, 255, 255, 0.2) inset, -4px 0 rgba(255, 255, 255, 0.2) inset, 4px 0 rgba(0, 0, 0, 0.5) inset;
+    -fx-box-shadow: 0 -4px rgba(0, 0, 0, 0.5) inset, 0 4px rgba(255, 255, 255, 0.2) inset, -4px 0 rgba(255, 255, 255, 0.2) inset, 4px 0 rgba(0, 0, 0, 0.5) inset;
 }
 
 .button:hover::after {
-  -fx-box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.15);
+    -fx-box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.15);
 }
 
+/* Minijuego */
 
 
+#panelControlJuego {
+    -fx-background-color: black;
+    -fx-border-color: white;
+    -fx-border-width: 5px;
+    -fx-border-style: solid;
+}
 
+#dialogo {
+    -fx-font-family: 'Determination Extended';
+    -fx-text-fill: white;
+    -fx-font-size: 9px;
+    -fx-wrap-text: true;
 
+}
+
+#preguntaDecision{
+    -fx-font-family: 'SAVE';
+    -fx-font-size: 13px;
+    -fx-text-fill: whitesmoke;
+    -fx-effect: dropshadow(gaussian, rgba(192,192,192,0.5), 5, 0, 2, 2);
+
+}
+
+#contenedorBoton {
+    -fx-background-color: black;
+    -fx-border-radius: 100%;
+    -fx-display: flex;
+    -fx-justify-content: center;
+    -fx-align-items: center;
+    -fx-effect: innershadow(gaussian, rgba(170,17,17,0.75), 0,0.5,0,0);
+    -fx-cursor: hand;
+}
+
+#btnParar {
+    -fx-text-transform: uppercase;
+    -fx-background-color: red;
+    -fx-text-fill: white;
+    -fx-text-shadow: black 0.1em 0.1em 0.2em;
+    -fx-font-size: 18px;
+    -fx-font-family: 'Press Start 2P';
+    -fx-alignment: center;
+    -fx-min-width: 80px;
+    -fx-min-height: 80px;
+}
+
+#contenedorBoton:pressed #btnParar {
+    -fx-effect: null;
+    -fx-translate-y: 0.2em;
+}
+
+/* Menu Sierra Nevada */
+
+#panelDialogoSierraNevada {
+    -fx-background-color: black;
+    -fx-border-color: white;
+    -fx-border-width: 9px;
+    -fx-border-style: solid;
+}
+
+#dialogoSierraNevada{
+    -fx-background-color: black;
+    -fx-font-family: 'Determination Extended';
+    -fx-text-fill: white;
+    -fx-font-size: 9px;
+    -fx-wrap-text: true;
+}
+#textPaseo,#textViaje,#textRest {
+    -fx-background-color: black;
+    -fx-font-family: 'SAVE';
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-wrap-text: true;
+
+}
 
 

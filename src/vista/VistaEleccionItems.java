@@ -31,11 +31,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import lombok.*;
 
 /**
  *
  * @author Luis
  */
+@Data
 public class VistaEleccionItems {
     //  Jugador
 
@@ -57,17 +59,20 @@ public class VistaEleccionItems {
     private Button btnContinuarJuego;
 
     //  Contenedores
+    private StackPane contenedorJuego;
     private VBox contInfoItems;
     private VBox contDinero;
     private StackPane stackImageItem;
     private VBox contItems;
     private HBox contObjetos;
-    private HBox contenedorJuego;
+    private HBox hContenedorJuego;
     private VBox contCheckItems;
     private VBox contBotones;
 
     public VistaEleccionItems() {
         inicializarComponentes();
+        
+        contenedorJuego.getChildren().add(hContenedorJuego);
 
     }
 
@@ -84,6 +89,8 @@ public class VistaEleccionItems {
 
     private void inicializarContInfoItems() {
 
+        contenedorJuego = new StackPane();
+        
         gafasSol = new GafasSol();
         trineo = new Trineo();
         imagenItem = new HashMap<>(); 
@@ -203,9 +210,9 @@ public class VistaEleccionItems {
 
     private void inicializarContJuego() {
 
-        contenedorJuego = new HBox();  // Espaciado de 30
-        contenedorJuego.setAlignment(Pos.BOTTOM_CENTER);
-        contenedorJuego.getChildren().addAll(contObjetos, contInfoItems);
+        hContenedorJuego = new HBox();  // Espaciado de 30
+        hContenedorJuego.setAlignment(Pos.BOTTOM_CENTER);
+        hContenedorJuego.getChildren().addAll(contObjetos, contInfoItems);
     }
 
     private void asignarIdsCss() {
@@ -214,14 +221,14 @@ public class VistaEleccionItems {
         contInfoItems.setId("contInfoItems");
         contDinero.setId("contDinero");
         contItems.setId("contItems");
-        contenedorJuego.setId("contenedorJuego");
+        hContenedorJuego.setId("contenedorJuego");
         cantidadDinero.setId("spinnerCantidadDinero");
         item1.setId("checkboxItem1");
         item2.setId("checkboxItem2");
         cantidadDinero.setId("cantidadDinero");
         item1.setId("item1");
         item2.setId("item2");
-        contenedorJuego.setId("contenedorJuego");
+        hContenedorJuego.setId("contenedorJuego");
     }
 
     private void cargarImagenesItems() {
@@ -233,58 +240,6 @@ public class VistaEleccionItems {
     
    
 
-    //  Getter
-    public Spinner<Double> getCantidadDinero() {
-        return cantidadDinero;
-    }
-
-    public Label getDescItem() {
-        return descItem;
-    }
-
-    public Map<String, Image> getPathImgItem() {
-        return imagenItem;
-    }
-
-    public HBox getContenedorJuego() {
-        return contenedorJuego;
-    }
-
-    public CheckBox getItem1() {
-        return item1;
-    }
-
-    public CheckBox getItem2() {
-        return item2;
-    }
-
-    public Button getBtnAceptarItems() {
-        return btnAceptarItems;
-    }
-
-    public Button getBtnContinuarJuego() {
-        return btnContinuarJuego;
-    }
-
-    public ImageView getImgItem() {
-        return imgItem;
-    }
-
-    //  Setters
-    public void setImgItem(ImageView imgItem) {
-        this.imgItem = imgItem;
-    }
-
-    public void setDescItem(Label descItem) {
-        this.descItem = descItem;
-    }
-
-    public void setImgDinero(ImageView imgDinero) {
-        this.imgDinero = imgDinero;
-    }
-
-    public void setTextItems(Label textItems) {
-        this.textItems = textItems;
-    }
+    
 
 }

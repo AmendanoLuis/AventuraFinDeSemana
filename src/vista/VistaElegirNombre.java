@@ -15,106 +15,105 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import lombok.*;
+import modelo.Alerta;
 
 /**
  *
  * @author Luis
  */
+@Data
 public class VistaElegirNombre {
 
-    private final VBox panelElegirNombre;
-    private TextField nombreField;
-    private final HBox panelAcciones;
     private Button btnAceptarNombre;
     private Button btnContinuarJuego;
     private Button btnVolverInicio;
+
+    private Label textoNombre;
+    private TextField nombreField;
+
     private ImageView imagenElegirNombre;
 
+    private VBox contenedorTexto;
+    private VBox vElegirNombre;
+    private HBox cBotones;
+
+    private StackPane contenedorJuego;
+
     public VistaElegirNombre() {
-        panelElegirNombre = new VBox(20);
-        panelAcciones = new HBox(20);
+        vElegirNombre = new VBox(20);
+        cBotones = new HBox(20);
         inicializarPanel();
+
     }
 
     private void inicializarPanel() {
+
+        iniciarComponentes();
 
         configurarImagen();
 
         configurarLabelNombre();
 
         configurarBotones();
+
+        configurarPanel();
+
+
+    }
+
+    private void configurarPanel() {
+        vElegirNombre.setAlignment(Pos.CENTER);
+
+        contenedorJuego.getChildren().add(vElegirNombre);
+    }
+
+    private void iniciarComponentes() {
+        btnAceptarNombre = new Button("Elegir nombre");
+        btnContinuarJuego = new Button("Continuar juego");
+        btnVolverInicio = new Button("Volver al inicio");
+
+        contenedorTexto = new VBox(10);
+        contenedorTexto.setPadding(new Insets(10));
+
+        textoNombre = new Label("Introduce tu nombre");
+        nombreField = new TextField();
+
+        contenedorJuego = new StackPane();
+
     }
 
     private void configurarBotones() {
-        // Configurar botones
-        btnAceptarNombre = new Button("Establecer Nombre");
-        btnContinuarJuego = new Button("Continuar Juego");
-        btnVolverInicio = new Button("Volver al inicio");
-        panelAcciones.getChildren().addAll(btnContinuarJuego, btnAceptarNombre, btnVolverInicio);
-        panelAcciones.setAlignment(Pos.CENTER);
-        panelElegirNombre.setAlignment(Pos.CENTER);
-        panelElegirNombre.getChildren().add(panelAcciones);
+
+        cBotones.getChildren().addAll(btnContinuarJuego, btnAceptarNombre, btnVolverInicio);
+        cBotones.setAlignment(Pos.CENTER);
+
+        vElegirNombre.getChildren().add(cBotones);
     }
 
     private void configurarLabelNombre() {
-        // Configurar el panel de introducción de nombre
-        VBox contenedorTexto = new VBox(10);
-        contenedorTexto.setPadding(new Insets(-20, 10, 10, 10));
-        contenedorTexto.setAlignment(Pos.CENTER);
 
-        Label textoNombre = new Label("Introduce tu nombre");
         textoNombre.setTextFill(Color.WHITE);
-        nombreField = new TextField();
         nombreField.setMinSize(100, 20);
 
         contenedorTexto.getChildren().addAll(textoNombre, nombreField);
+        contenedorTexto.setAlignment(Pos.CENTER);
 
-        panelElegirNombre.getChildren().add(contenedorTexto);
+        vElegirNombre.getChildren().add(contenedorTexto);
     }
 
     private void configurarImagen() {
-        // Configurar la imagen
-        panelElegirNombre.setSpacing(70);
-        panelElegirNombre.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
+
+        vElegirNombre.setSpacing(70);
         imagenElegirNombre = new ImageView(new Image("resources/elegirNombre.png"));
-        imagenElegirNombre.setFitWidth(650);
-        imagenElegirNombre.setFitHeight(350);
-        imagenElegirNombre.setPreserveRatio(true);
-        imagenElegirNombre.setSmooth(true);
-        imagenElegirNombre.setCache(true);
-        imagenElegirNombre.setPickOnBounds(true);
+        imagenElegirNombre.setFitWidth(350);
+        imagenElegirNombre.setFitHeight(250);
 
-        VBox.setVgrow(imagenElegirNombre, Priority.ALWAYS);
-        panelElegirNombre.getChildren().add(imagenElegirNombre);
+        vElegirNombre.getChildren().add(imagenElegirNombre);
 
-    }
-
-  
-
-    public VBox getContenedorJuego() {
-        return panelElegirNombre;
-    }
-
-    public ImageView getImagenElegirNombre() {
-        return imagenElegirNombre;
-    }
-
-    public Button getBtnVolverInicio() {
-        return btnVolverInicio;
-    }
-
-    public TextField getNombreJugador() {
-        return nombreField;
-    }
-
-    public Button getBtnAceptarNombre() {
-        return btnAceptarNombre;
-    }
-
-    public Button getBtnContinuarJuego() {
-        return btnContinuarJuego;
     }
 
 }
