@@ -13,8 +13,8 @@ import modelo.Personaje;
  *
  * @author Luis
  */
-public class CP_Salami implements Personaje {
-
+public class EinalbelWardrobe implements Personaje {
+ 
     private double dinero;
 
     private Map<String, String> poses;
@@ -23,8 +23,8 @@ public class CP_Salami implements Personaje {
 
     private Map<String, String> dialogos;
 
-    public CP_Salami() {
-        nombre = "C.P Salami";
+    public EinalbelWardrobe() {
+        nombre = "Einalbel Wardrobe";
         this.dialogos = new HashMap<>();
         this.poses = new HashMap<>();
         cargarDialogos();
@@ -34,21 +34,26 @@ public class CP_Salami implements Personaje {
     }
 
     private void cargarDialogos() {
-        dialogos.put("d1", "Ya ves, llevaba semanas sin dormir.");
-        dialogos.put("d2", "¿Hacemos algo este Fin de Semana para celebrarlo?");
-        dialogos.put("d3", "Ya ves, yo igual.");
-        dialogos.put("d4", "MOGUISE BLAAAAH!!! ");
-        dialogos.put("d5", "Esperad que voy con vosotros.");
-        dialogos.put("d6", "Pues ya se va haciendo tarde, yo creo que deberíamos salir ya.");
-        dialogos.put("d7", "Estoy bien, he ido antes en casa.");
-        dialogos.put("d8", "Esperad que voy con vosotros.");
+        dialogos.put("d1", "Que alivio haber acabado ya de exámenes.");
+        dialogos.put("d2", "Gracias Heller.");
+        dialogos.put("d3", "Yo igual.");
+        dialogos.put("d4", "Bueno, ¿pues quién paga?");
+        dialogos.put("d5", "Es cierto, es mañana no me acordaba jsjs");
+        dialogos.put("d6", "Adiós adiós .");
+        dialogos.put("d7", "Bueno, ¿pues quién paga?");
+        dialogos.put("d8", "Ay pero si es mañana no me acordaba jsjs");
+        dialogos.put("d9", " Adiós adiós .");
+        dialogos.put("d10", "Creo que Marx se ha dormido porque no me contesta las llamadas.");
+        dialogos.put("d11", "Si, porque si no no vamos a disfrutar del senderismo que hay un puente con muy buenas vistas.");
+        dialogos.put("d12", "Yo igual, me voy subiendo.");
 
     }
 
     private void cargarPoses() {
-        poses.put("p1", "resources/salamiNormal.png");
-        poses.put("p2", "resources/salamiJocoso.png");
-        poses.put("p3", "resources/salamiSorprendido.png");
+        poses.put("p1", "resources/einebelNormal.png");
+        poses.put("p2", "resources/einebelVacilona.png");
+        poses.put("p3", "resources/einebelPensante.png");
+        poses.put("p4", "resources/einebelEsperando.png");
 
     }
 
@@ -82,6 +87,5 @@ public class CP_Salami implements Personaje {
     @Override
     public double obtenerDinero() {
         return this.dinero;
-    }
-
+    }   
 }

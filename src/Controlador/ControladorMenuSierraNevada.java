@@ -14,11 +14,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import modelo.ConversacionesSierraNevada;
 import vista.VistaMenuSierraNevada;
+import lombok.Data;
 
 /**
  *
  * @author user
  */
+@Data
 public class ControladorMenuSierraNevada {
 
     private VistaMenuSierraNevada vMenu;
@@ -50,6 +52,8 @@ public class ControladorMenuSierraNevada {
     private MenuItem entrar;
     private MenuItem interactuar;
     private MenuItem salir;
+
+    private int seleccion = 0;
 
     public ControladorMenuSierraNevada() {
         vMenu = new VistaMenuSierraNevada();
@@ -117,6 +121,11 @@ public class ControladorMenuSierraNevada {
             mostrarPose(cActividad);
         });
 
+    }
+
+    protected int actividadSeleccionada() {
+
+        return seleccion;
     }
 
     private void mostrarDialogo(StackPane cActividad) {
@@ -307,9 +316,6 @@ public class ControladorMenuSierraNevada {
         });
     }
 
-    
-    
-    
     public VistaMenuSierraNevada getvMenu() {
         return vMenu;
     }

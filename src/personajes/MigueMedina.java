@@ -13,7 +13,7 @@ import modelo.Personaje;
  *
  * @author Luis
  */
-public class CP_Salami implements Personaje {
+public class MigueMedina implements Personaje {
 
     private double dinero;
 
@@ -23,8 +23,8 @@ public class CP_Salami implements Personaje {
 
     private Map<String, String> dialogos;
 
-    public CP_Salami() {
-        nombre = "C.P Salami";
+    public MigueMedina() {
+        nombre = "Migue Medina";
         this.dialogos = new HashMap<>();
         this.poses = new HashMap<>();
         cargarDialogos();
@@ -34,21 +34,24 @@ public class CP_Salami implements Personaje {
     }
 
     private void cargarDialogos() {
-        dialogos.put("d1", "Ya ves, llevaba semanas sin dormir.");
-        dialogos.put("d2", "¿Hacemos algo este Fin de Semana para celebrarlo?");
-        dialogos.put("d3", "Ya ves, yo igual.");
-        dialogos.put("d4", "MOGUISE BLAAAAH!!! ");
-        dialogos.put("d5", "Esperad que voy con vosotros.");
-        dialogos.put("d6", "Pues ya se va haciendo tarde, yo creo que deberíamos salir ya.");
-        dialogos.put("d7", "Estoy bien, he ido antes en casa.");
-        dialogos.put("d8", "Esperad que voy con vosotros.");
+        dialogos.put("d1", "Y algunos incluso os habéis graduado.");
+        dialogos.put("d2", "Yo a Sierra Nevada no podría ir pero de senderismo a los Cahorros voy de una.");
+        dialogos.put("d3", "Venga pago yo y me hacéis bizum.");
+        dialogos.put("d4", "Ya está pagado.");
+        dialogos.put("d5", "Nos vemos.");
+        dialogos.put("d6", "Venga pago yo y me hacéis bizum.");
+        dialogos.put("d7", "Ya está pagado.");
+        dialogos.put("d8", "¡Nos vemooos.");
+        dialogos.put("d9", "Pues ya se va haciendo tarde, yo creo que deberíamos salir ya.");
+        dialogos.put("d10", "Estoy bien, he ido antes en casa.");
 
     }
 
     private void cargarPoses() {
-        poses.put("p1", "resources/salamiNormal.png");
-        poses.put("p2", "resources/salamiJocoso.png");
-        poses.put("p3", "resources/salamiSorprendido.png");
+        poses.put("p1", "resources/migueTriste.png");
+        poses.put("p2", "resources/miguePensante.png");
+        poses.put("p3", "resources/migueCelebracion.png");
+        poses.put("p4", "resources/migueNormal.png");
 
     }
 
@@ -83,5 +86,4 @@ public class CP_Salami implements Personaje {
     public double obtenerDinero() {
         return this.dinero;
     }
-
 }

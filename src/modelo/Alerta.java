@@ -34,7 +34,7 @@ public class Alerta {
 
         tituloInfo.setMinSize(100, 50);
         tituloInfo.setPadding(new Insets(10));
-        
+
         info.setMinSize(250, 200);
         info.setPadding(new Insets(10));
 
@@ -60,12 +60,12 @@ public class Alerta {
         setIdTexto();
     }
 
-    public Alerta(Image img, int alto, int ancho) {
+    public Alerta(Image img, int alto, int ancho,String textoBtn) {
         tituloInfo = new Label("");
         separador = new Separator();
 
         imagen = new ImageView(img);
-        btnAlerta = new Button("Aceptar");
+        btnAlerta = new Button(textoBtn);
 
         tituloInfo.setMinSize(100, 50);
         imagen.setFitHeight(alto);
@@ -73,7 +73,6 @@ public class Alerta {
 
         cAlerta = new StackPane();
         vAlerta = new VBox(20);
-        vAlerta.setSpacing(10);
 
         tituloInfo.setWrapText(true);
 
@@ -91,6 +90,12 @@ public class Alerta {
         btnAlerta.setOnAction(event -> retirarAlerta());
 
         setIdImage();
+
+    }
+
+    public void cambiarImagenAlerta(Image img) {
+
+        imagen.setImage(img);
 
     }
 

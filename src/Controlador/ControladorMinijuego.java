@@ -23,7 +23,6 @@ import javafx.util.Duration;
 import lombok.*;
 import modelo.Alerta;
 import modelo.Jugador;
-import personajes.MariaTrueno;
 import vista.VistaMinijuego;
 
 /**
@@ -35,7 +34,10 @@ public class ControladorMinijuego {
 
     private VistaMinijuego vistaM;
 
-    private ImageView coche;
+    private StackPane coche;
+    private ImageView rueda1;
+    private ImageView rueda2;
+
     private Image imgPersonajeP1;
     private Image imgPersonajeP2;
 
@@ -45,21 +47,23 @@ public class ControladorMinijuego {
 
     private Transition transicionCoche;
 
-    private static final int POSICION_TERMINAR_ANIMACION = 730;
-    private static int POSICION_LIMITE_COCHE_1 = 400;
+    private static int POSICION_TERMINAR_ANIMACION = 730;
 
-    private static int POSICION_LIMITE_COCHE_2 = 720;
+    private static double POSICION_PARADA_1 = 200;
+    private static double POSICION_PARADA_2 = 450;
+    private static double POSICION_AVISO_PARADA_1 = 150;
+    private static double POSICION_AVISO_PARADA_2 = 300;
+    private static final int DURACION_ANIMACION = 20;
+    private static final int DURACION_PAUSA_PARADAS = 5;
 
-    private static double POSICION_PARADA_1 = 265;
-    private static double POSICION_AVISO_PARADA_1 = 165;
-
-    private static double POSICION_PARADA_2 = 530;
-    private static double POSICION_AVISO_PARADA_2 = 430;
+    private int countParadas;
+    private boolean mostrarAviso1 = false;
+    private boolean mostrarAviso2 = false;
 
     private boolean parada1 = false;
     private boolean parada2 = false;
 
-    private boolean juegoPerdido = false;
+    private boolean juegoPerdido = true;
     private boolean juegoGanado = false;
 
     private Pane contenedorJuego;
@@ -86,9 +90,9 @@ public class ControladorMinijuego {
 
         contenedorJuego = vistaM.getContenedorJuego();
 
-        cargarImagenesAlerta();
-
-        coche = vistaM.getCoche();
+        coche = vistaM.getCCoche();
+        rueda1 = vistaM.getRueda1();
+        rueda2 = vistaM.getRueda2();
 
         personaje = vistaM.getPersonaje();
         dialogo = vistaM.getDialogo();
@@ -96,21 +100,31 @@ public class ControladorMinijuego {
 
     }
 
-    protected void cargarImagenesAlerta() {
+    public void cambiarImagenAlerta() {
 
-        imgGanado = vistaM.getImgJuegoGanadoSn();
-        imgPerdido = vistaM.getImgJuegoPerdidoSn();
-        imgPausa = vistaM.getImgPausaSn();
-        imgGanado = vistaM.getImgJuegoGanadoCh();
-        imgPerdido = vistaM.getImgJuegoPerdidoCh();
-        imgPausa = vistaM.getImgPausaCh();
+        Jugador jugador = Jugador.getInstanciaJugador();
 
+        if (jugador.isCahorros()) {
+            alertaJuegoGanado.cambiarImagenAlerta(vistaM.getImgJuegoGanadoCh());
+            alertaJuegoPerdido.cambiarImagenAlerta(vistaM.getImgJuegoPerdidoCh());
+            alertaPausa.cambiarImagenAlerta(vistaM.getImgPausaCh());
+
+        } else if (jugador.isSierraNevada()) {
+            alertaJuegoGanado.cambiarImagenAlerta(vistaM.getImgJuegoGanadoSn());
+            alertaJuegoPerdido.cambiarImagenAlerta(vistaM.getImgJuegoPerdidoSn());
+            alertaPausa.cambiarImagenAlerta(vistaM.getImgPausaSn());
+        }
     }
 
     private void cargarAlertas() {
-        alertaJuegoGanado = new Alerta(imgGanado, 200, 300);
-        alertaJuegoPerdido = new Alerta(imgPerdido, 100, 100);
-        alertaPausa = new Alerta(imgPausa, 200, 300);
+
+        imgGanado = null;
+        imgPerdido = null;
+        imgPausa = null;
+
+        alertaJuegoGanado = new Alerta(imgGanado, 200, 300, "Vamos");
+        alertaJuegoPerdido = new Alerta(imgPerdido, 100, 100, "Reiniciar...");
+        alertaPausa = new Alerta(imgPausa, 180, 250, "Aceptar");
 
         contenedorJuego.getChildren().addAll(
                 alertaJuegoGanado.getAlerta(),
@@ -137,7 +151,7 @@ public class ControladorMinijuego {
     private void movimientoCoche() {
 
         transicionCoche = new TransicionMinijuego(
-                Duration.seconds(20), coche,
+                Duration.seconds(DURACION_ANIMACION), coche, rueda1, rueda2,
                 0, POSICION_TERMINAR_ANIMACION, this);
 
     }
@@ -156,13 +170,8 @@ public class ControladorMinijuego {
                 vistaM.getCBotonTerminarMinijuego().setVisible(true);
                 vistaM.getCBotonTerminarMinijuego().toFront();
 
-            }
-
-            if (juegoPerdido) {
-                alertaJuegoPerdido.mostrarAlertaConImagen("JUEGO PERDIDO 2");
-
-                eventoReiniciarConBotonAlerta();
-
+            } else if (juegoPerdido) {
+                terminarJuegoPerdido();
             }
 
         });
@@ -171,10 +180,10 @@ public class ControladorMinijuego {
 
     }
 
-    private void eventoReiniciarConBotonAlerta() {
+    private void cargarEventoReiniciarJuegoBotonAlerta() {
         alertaJuegoPerdido.getBtnAlerta().setOnAction(event -> {
-            alertaJuegoPerdido.retirarAlerta();
             reiniciarJuego();
+            alertaJuegoPerdido.retirarAlerta();
 
         });
     }
@@ -189,63 +198,82 @@ public class ControladorMinijuego {
             btnParar.setCursor(Cursor.DEFAULT);
         });
         btnParar.setOnAction(event -> {
-            pararCoche();
+            comprobarEstadoJuego();
+            comprobarEstadoJuegoParada2();
+
+            if (!parada2 && !parada1) {
+
+            }
+
             if (parada1) {
                 pausarJuego();
-                POSICION_PARADA_1 = 800;
-                POSICION_LIMITE_COCHE_1 = 800;
-                alertaPausa.mostrarAlertaConImagen("PAUSA PARADA 1");
-
+                alertaPausa.mostrarAlertaConImagen("Esperando...");
+            } else if (mostrarAviso1 && !parada1) {
+                terminarJuegoPerdido();
             }
 
             if (parada2) {
                 pausarJuego();
-                POSICION_PARADA_2 = 800;
-
-                alertaPausa.mostrarAlertaConImagen("PAUSA PARADA 2");
-
+                alertaPausa.mostrarAlertaConImagen("Bueno, quien se cuenta algo :)");
+            } else if (!parada2 && mostrarAviso2) {
+                terminarJuegoPerdido();
             }
 
         });
-    }
-
-    private void pararCoche() {
-        comprobarEstadoJuego();
-
     }
 
     private void comprobarEstadoJuego() {
 
         double posicionCoche = coche.getTranslateX();
 
-        if (posicionCoche > POSICION_PARADA_1
-                && posicionCoche < POSICION_LIMITE_COCHE_1) {
+        if (parada1 && parada2) {
+            juegoGanado = true;
 
-            reiniciarJuego();
+        }
 
-        } else if (posicionCoche >= POSICION_AVISO_PARADA_1
-                && posicionCoche < POSICION_PARADA_1
-                && transicionCoche.getStatus() != Animation.Status.PAUSED) {
+        if (posicionCoche > POSICION_AVISO_PARADA_1
+                && posicionCoche < POSICION_PARADA_1) {
+            if (transicionCoche.getStatus() != Animation.Status.PAUSED
+                    && countParadas == 0) {
 
-            parada1 = true;
+                countParadas = 1;
+                POSICION_PARADA_1 = 800;
+
+                parada1 = true;
+            }
+        }
+
+    }
+
+    private void comprobarEstadoJuegoParada2() {
+
+        double posicionCoche = coche.getTranslateX();
+
+        if (parada1 && parada2) {
+            juegoGanado = true;
+
         }
 
         if (parada1) {
 
-            if (posicionCoche > POSICION_PARADA_2
-                    && posicionCoche < POSICION_LIMITE_COCHE_2) {
+            if (posicionCoche > POSICION_AVISO_PARADA_2
+                    && posicionCoche < POSICION_PARADA_2) {
 
-                reiniciarJuego();
+                mostrarAviso1 = false;
 
-            } else if (posicionCoche >= POSICION_AVISO_PARADA_2
-                    && posicionCoche <= POSICION_PARADA_2
-                    && transicionCoche.getStatus() != Animation.Status.PAUSED) {
+                if (transicionCoche.getStatus() != Animation.Status.PAUSED
+                        && countParadas == 1) {
 
-                juegoPerdido = false;
-                parada2 = true;
-                juegoGanado = true;
+                    countParadas = 2;
+                    POSICION_PARADA_2 = 800;
+
+                    parada2 = true;
+                    juegoPerdido = false;
+
+                }
 
             }
+
         }
 
     }
@@ -254,28 +282,30 @@ public class ControladorMinijuego {
         alertaJuegoGanado.mostrarAlertaConImagen("¡Has llegado con el coche limpio!");
     }
 
+    private void terminarJuegoPerdido() {
+        alertaJuegoPerdido.mostrarAlertaConImagen("Te han llenado el coche de meao");
+        parada1 = false;
+        parada2 = false;
+        cargarEventoReiniciarJuegoBotonAlerta();
+    }
+
     private void reiniciarJuego() {
-        if (juegoPerdido) {
-            transicionCoche.stop();
-            transicionCoche = new TransicionMinijuego(
-                    Duration.seconds(20), coche, 0,
-                    POSICION_TERMINAR_ANIMACION, this);
 
-            juegoPerdido = true;
-            juegoGanado = false;
+        transicionCoche.stop();
+        transicionCoche = new TransicionMinijuego(
+                Duration.seconds(DURACION_ANIMACION), coche, rueda1, rueda2, 0,
+                POSICION_TERMINAR_ANIMACION, this);
 
-            parada1 = false;
-            parada2 = false;
+        juegoPerdido = true;
+        juegoGanado = false;
 
-            POSICION_PARADA_1 = 265;
-            POSICION_PARADA_2 = 530;
+        parada1 = false;
+        parada2 = false;
+        countParadas = 0;
+        POSICION_PARADA_1 = 265;
+        POSICION_PARADA_2 = 530;
 
-            POSICION_LIMITE_COCHE_1 = 400;
-
-            POSICION_LIMITE_COCHE_2 = 720;
-
-            transicionCoche.play();
-        }
+        transicionCoche.play();
 
     }
 
@@ -285,14 +315,15 @@ public class ControladorMinijuego {
         transicionCoche.pause();
         reproducirSonido();
 
-        PauseTransition pause = new PauseTransition(Duration.seconds(5));
+        PauseTransition pause = new PauseTransition(Duration.seconds(DURACION_PAUSA_PARADAS));
         pause.setOnFinished(event -> {
             personaje.setImage(imgPersonajeP2);
-            dialogo.setText("Parad porfa, disculpad enseguida vengo.");
+            dialogo.setText("Gracias por esperar chicoss :)");
+
+            this.alertaPausa.retirarAlerta();
 
             transicionCoche.play();
 
-            this.alertaPausa.retirarAlerta();
         });
 
         pause.play();
@@ -301,19 +332,20 @@ public class ControladorMinijuego {
     protected void mostrarAviso(double posicionCoche) {
         imgPersonajeP1 = vistaM.getImgPersonajeP1();
 
-        if (posicionCoche >= POSICION_AVISO_PARADA_1 && posicionCoche <= 265) {
+        if (posicionCoche >= POSICION_AVISO_PARADA_1 && posicionCoche <= 200) {
             personaje.setImage(imgPersonajeP1);
             dialogo.setText("Ay, parad que me meo por favor.");
-            comprobarEstadoJuego();
+            mostrarAviso1 = true;
 
-        } else if (posicionCoche >= POSICION_AVISO_PARADA_2 && posicionCoche <= 530) {
+        } else if (posicionCoche >= POSICION_AVISO_PARADA_2 && posicionCoche <= 450) {
             personaje.setImage(imgPersonajeP1);
-            dialogo.setText("¡¡Para el coche!! Lo siento tengo que ir al baño otra vez.");
-            comprobarEstadoJuego();
+            dialogo.setText("¡¡Para el coche!! Lo siento, tengo que ir al baño otra vez.");
+            mostrarAviso2 = true;
 
         } else {
             personaje.setImage(null);
             dialogo.setText(" ");
+
         }
 
     }

@@ -4,6 +4,7 @@
  */
 package vista;
 
+import items.Bocadillo;
 import items.GafasSol;
 import items.Trineo;
 import java.util.HashMap;
@@ -43,6 +44,7 @@ public class VistaEleccionItems {
 
     private GafasSol gafasSol;
     private Trineo trineo;
+    private Bocadillo bocadillo;
 
     //  Nodos
     private Image item;
@@ -55,6 +57,7 @@ public class VistaEleccionItems {
     private Label textItems;
     private CheckBox item1;
     private CheckBox item2;
+    private CheckBox item3;
     private Button btnAceptarItems;
     private Button btnContinuarJuego;
 
@@ -93,6 +96,7 @@ public class VistaEleccionItems {
         
         gafasSol = new GafasSol();
         trineo = new Trineo();
+        bocadillo = new Bocadillo();
         imagenItem = new HashMap<>(); 
         cargarImagenesItems();
         
@@ -130,13 +134,12 @@ public class VistaEleccionItems {
 
         item1 = new CheckBox("Gafas de Sol");
         item2 = new CheckBox("Trineo");
+        item3 = new CheckBox("Bocadillo");
 
         item1.setAlignment(Pos.CENTER_LEFT);
         item2.setAlignment(Pos.CENTER_LEFT);
+        item3.setAlignment(Pos.CENTER_LEFT);
 
-        // Aplicar estilos CSS para alinear el texto a la derecha
-        item1.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
-        item2.setStyle("-fx-font-size: 16px; -fx-text-fill: white;");
 
         // Contenedores
         textItems = new Label("ITEMS");
@@ -145,7 +148,7 @@ public class VistaEleccionItems {
         contItems.setAlignment(Pos.CENTER);
 
         contCheckItems = new VBox(10);
-        contCheckItems.getChildren().addAll(item1, item2);
+        contCheckItems.getChildren().addAll(item1, item2,item3);
         contItems.getChildren().addAll(textItems, contCheckItems);
         contItems.setPadding(new Insets(10, 10, 10, 20));
         contItems.setMinSize(290, 550);
@@ -192,7 +195,7 @@ public class VistaEleccionItems {
         SpinnerValueFactory<Double> valoresDinero = new SpinnerValueFactory.DoubleSpinnerValueFactory(40, 150, 40);
         cantidadDinero.setValueFactory(valoresDinero);
 
-        contDinero = new VBox(20);  // Espaciado de 10
+        contDinero = new VBox(20); 
         contDinero.setPadding(new Insets(10, 10, 10, 10));
         contDinero.setAlignment(Pos.CENTER);
 
@@ -202,7 +205,7 @@ public class VistaEleccionItems {
     }
 
     private void inicializarContObjetos() {
-        contObjetos = new HBox();  // Espaciado de 20
+        contObjetos = new HBox();  
         contObjetos.setAlignment(Pos.CENTER);
         contObjetos.getChildren().addAll(contDinero, contItems);
         HBox.setHgrow(contObjetos, Priority.SOMETIMES);
@@ -210,7 +213,7 @@ public class VistaEleccionItems {
 
     private void inicializarContJuego() {
 
-        hContenedorJuego = new HBox();  // Espaciado de 30
+        hContenedorJuego = new HBox(); 
         hContenedorJuego.setAlignment(Pos.BOTTOM_CENTER);
         hContenedorJuego.getChildren().addAll(contObjetos, contInfoItems);
     }
@@ -228,6 +231,7 @@ public class VistaEleccionItems {
         cantidadDinero.setId("cantidadDinero");
         item1.setId("item1");
         item2.setId("item2");
+        item3.setId("item3");
         hContenedorJuego.setId("contenedorJuego");
     }
 
@@ -235,6 +239,7 @@ public class VistaEleccionItems {
 
         imagenItem.put("Gafas Sol", gafasSol.getImgItem());
         imagenItem.put("Trineo", trineo.getImgItem());
+        imagenItem.put("Bocadillo", bocadillo.getImgItem());
 
     }
     

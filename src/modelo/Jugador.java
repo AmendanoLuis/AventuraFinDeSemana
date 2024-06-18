@@ -26,6 +26,10 @@ public class Jugador {
     private boolean sierraNevada = false;
     private boolean cahorros = false;
 
+    private boolean actividadesAcabadas = false;
+    private int contadorActividades = 0;
+    private int actividadesRealizar = 0;
+
     private Image imgDineroJugador;
     private ImageView iconoDineroJugador;
     private List<Items> items;
@@ -33,17 +37,29 @@ public class Jugador {
     private Jugador() {
         imgDineroJugador = new Image("resources/iconoDinero.png");
         iconoDineroJugador = new ImageView(imgDineroJugador);
-        
+
         iconoDineroJugador.setFitHeight(20);
         iconoDineroJugador.setFitWidth(20);
-        
-        
+
         items = new ArrayList();
-        //  Altura
+
         iconoDineroJugador.setFitHeight(40);
-        //  Ancho
         iconoDineroJugador.setFitWidth(40);
 
+        comprobarCantidadActividades();
+        if (cahorros) {
+            actividadesRealizar = 2;
+        }
+        if (sierraNevada) {
+            actividadesRealizar = 3;
+        }
+
+    }
+
+    private void comprobarCantidadActividades() {
+        if (contadorActividades == actividadesRealizar) {
+            actividadesAcabadas = true;
+        }
     }
 
     public static Jugador getInstanciaJugador() {

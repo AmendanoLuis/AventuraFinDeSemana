@@ -140,7 +140,7 @@
     -fx-padding: 2px;
 }
 
-#item1 > .box, #item2 > .box {
+#item1 > .box, #item2 > .box, #item3 > .box {
     -fx-background-color: lightgray;
 }
 
@@ -154,11 +154,19 @@
     -fx-font-size: 16px;
 }
 
+#item3{
+    -fx-font-family: 'SAVE';
+    -fx-font-size: 16px;
+}
+
 #item1 > .box:selected {
     -fx-background-color: #2d8cf0;
 }
 
 #item2 > .box:selected {
+    -fx-background-color: #2d8cf0;
+}
+#item3 > .box:selected {
     -fx-background-color: #2d8cf0;
 }
 

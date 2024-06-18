@@ -1,4 +1,4 @@
-package Controlador;
+package modelo;
 
 import java.util.List;
 import java.util.Map;

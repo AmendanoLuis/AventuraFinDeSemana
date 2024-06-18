@@ -35,11 +35,17 @@ public class MariaTrueno implements Personaje {
     }
 
     private void cargarDialogos() {
-        dialogos.put("d1", "¡Hola! Soy Maria Trueno");
-        dialogos.put("d2", "¿Como estan muchachos?");
-        dialogos.put("d3", "Muy bueno.");
-        dialogos.put("d4", "*saca el movil* Ala, esto pa proyectos 9.000");
-        dialogos.put("d5", "¡Con dios!");
+        dialogos.put("d1", "Bueno, que felices todos después de terminar ya.");
+        dialogos.put("d2", "Sii, podemos ir a hacer senderismo o a la nieve en Sierra Nevada");
+        dialogos.put("d3", "Por mi donde digáis.");
+        dialogos.put("d4", "Aiba si es mañana yaa, que guay ,vamos a la nieve.");
+        dialogos.put("d5", "Bueno vámonos ya que verás que alguno se duerme jsjs");
+        dialogos.put("d6", "Migue tampoco me contesta. ");
+        dialogos.put("d7", "Yo estoy bien.");
+        dialogos.put("d8", "Aiba si es mañana yaa, que guayy , me han dicho que es precioso.");
+        dialogos.put("d9", "Bueno vámonos ya que verás que alguno se duerme jsjs");
+        dialogos.put("d10", "Salami tampoco me contesta. ");
+        dialogos.put("d11", "Yo estoy bien.");
 
     }
 

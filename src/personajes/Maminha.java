@@ -36,16 +36,25 @@ public class Maminha implements Personaje {
     }
 
     private void cargarDialogos() {
-        dialogos.put("d1", "¡Hola! Soy Maminha.");
-        dialogos.put("d2", "Que tal peleles");
-        dialogos.put("d3", "Vamos espabilad chavales.");
-        dialogos.put("d4", "...");
-        dialogos.put("d5", "Adios chavalada.");
+        dialogos.put("d1", "Puta la barsa !!!");
+        dialogos.put("d2", "Estaba hecho un zombie el chaval.");
+        dialogos.put("d3", "Gracias bebes.");
+        dialogos.put("d4", "Heller y yo nos adaptamos.");
+        dialogos.put("d5", "Decidido pues, vamos a pagar y nos vamos que mañana hay que despertar temprano para ir.");
+        dialogos.put("d6", "Adios chavalada.");
+        dialogos.put("d7", "Hola, ¿has dormido bien? Espero que si porque hoy nos espera un gran día.");
+        dialogos.put("d8", "Yo aprovecharé para dormir de camino . ¿Alguien quiere ir al baño antes?");
+        dialogos.put("d9", "Decidido pues, vamos a pagar y nos vamos que mañana hay que despertar temprano para ir. ");
+        dialogos.put("d10", "Adiós chavalee.");
+        dialogos.put("d11", "Hola *nombre de jugador *, ¿Has dormido bien? Espero que si porque hoy nos espera un gran día.");
+        dialogos.put("d12", "Yo aprovecharé para dormir de camino. ¿Alguien quiere ir al baño antes?");
     }
 
     private void cargarPoses() {
-        poses.put("p1", "resources/poseMaminhaNormal.png");
-        poses.put("p2", "resources/poseMaminhaPensante.png");
+        poses.put("p1", "resources/maminhaVacilona.png");
+        poses.put("p2", "resources/maminhaAgresiva.png");
+        poses.put("p3", "resources/maminhaJocosa.png");
+        poses.put("p4", "resources/maminhaNormal.png");
 
     }
 

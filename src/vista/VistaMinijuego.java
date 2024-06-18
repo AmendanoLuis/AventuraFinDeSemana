@@ -30,8 +30,15 @@ public class VistaMinijuego {
 
     private Image imagenCarretera;
     private ImageView carreteraFondo;
+
     private Image imagenCoche;
     private ImageView coche;
+
+    private Image imgRueda1;
+    private ImageView rueda1;
+
+    private Image imgRueda2;
+    private ImageView rueda2;
 
     private Image imgJuegoPerdidoSn;
     private Image imgJuegoPerdidoCh;
@@ -41,6 +48,8 @@ public class VistaMinijuego {
 
     private Image imgJuegoGanadoSn;
     private Image imgJuegoGanadoCh;
+
+    private StackPane cCoche;
 
     private String nJugador;
 
@@ -79,9 +88,10 @@ public class VistaMinijuego {
 
     private void iniciarImagenes() {
 
-        cargarImagenesAlerta(1);
+        cargarImagenesAlerta();
 
         //  Iniciar imagenes
+        cCoche = new StackPane();
         imagenCarretera = new Image("resources/carreteraFondo.png");
         carreteraFondo = new ImageView(imagenCarretera);
         carreteraFondo.setFitWidth(850);
@@ -90,32 +100,51 @@ public class VistaMinijuego {
         imagenCoche = new Image("resources/coche.png");
         coche = new ImageView(imagenCoche);
 
+        imgRueda1 = new Image("resources/rueda1.png");
+        rueda1 = new ImageView(imgRueda1);
+
+        imgRueda2 = new Image("resources/rueda2.png");
+        rueda2 = new ImageView(imgRueda2);
+
+        cCoche.getChildren().addAll(coche, rueda1, rueda2);
+
         //  Tamaño coche
         coche.setFitHeight(140);
         coche.setFitWidth(280);
+        rueda1.setFitHeight(40);
+        rueda1.setFitWidth(40);
+        rueda2.setFitHeight(40);
+        rueda2.setFitWidth(40);
 
-        contenedorJuego.getChildren().addAll(carreteraFondo, coche);
+        contenedorJuego.getChildren().addAll(carreteraFondo, cCoche);
 
-        //  Posición Inicial Coche
-        coche.setLayoutX(0);
-        coche.setLayoutY(350);
+        posicionCocheYRuedas();
 
     }
 
-    public void cargarImagenesAlerta(int i) {
+    private void posicionCocheYRuedas() {
+        //  Posición Inicial Coche
+        cCoche.setLayoutX(0);
+        cCoche.setLayoutY(320);
 
-        if (i == 1) {
+        // Posicionar las ruedas dentro del contenedor del coche
+        rueda1.setTranslateX(-70    ); 
+        rueda1.setTranslateY(13);
+        rueda2.setTranslateX(90); 
+        rueda2.setTranslateY(13);
 
-            imgJuegoPerdidoCh = new Image("resources/juegoPerdido.png");
-            imgPausaCh = new Image("resources/fotoEsperaSierraNevada.png");
-            imgJuegoGanadoCh = new Image("resources/juegoGanadoCahorros.png");
+    }
 
-        } else if (i == 0) {
-            imgJuegoPerdidoSn = new Image("resources/juegoPerdido.png");
-            imgJuegoGanadoSn = new Image("resources/juegoGanadoSierraNevada.png");
-            imgPausaSn = new Image("resources/fotoEsperaSierraNevada.png");
+    private void cargarImagenesAlerta() {
 
-        }
+        imgJuegoPerdidoCh = new Image("resources/juegoPerdido.png");
+        imgPausaCh = new Image("resources/fotoEsperaSierraNevada.png");
+        imgJuegoGanadoCh = new Image("resources/juegoGanadoCahorros.png");
+
+        imgJuegoPerdidoSn = new Image("resources/juegoPerdido.png");
+        imgJuegoGanadoSn = new Image("resources/juegoGanadoSierraNevada.png");
+        imgPausaSn = new Image("resources/fotoEsperaSierraNevada.png");
+
     }
 
     private void iniciarStatsJugador() {

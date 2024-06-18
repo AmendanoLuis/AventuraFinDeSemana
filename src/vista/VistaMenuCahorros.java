@@ -111,7 +111,7 @@ public class VistaMenuCahorros {
 
         textRest.setVisible(false);
 
-        restaurante.setFitHeight(310);
+        restaurante.setFitHeight(290);
         restaurante.setFitWidth(460);
 
         cRestaurante.getChildren().add(restaurante);

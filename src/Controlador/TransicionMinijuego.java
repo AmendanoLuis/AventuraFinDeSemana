@@ -4,6 +4,7 @@
  */
 package Controlador;
 
+import javafx.animation.RotateTransition;
 import javafx.animation.Transition;
 import javafx.scene.Node;
 import javafx.util.Duration;
@@ -19,14 +20,35 @@ public class TransicionMinijuego extends Transition {
     private double finalX;
     private double posicionActualCoche;
     private ControladorMinijuego controlador;
+    private RotateTransition rotateRueda1;
+    private RotateTransition rotateRueda2;
 
-
-    public TransicionMinijuego(Duration duration, Node coche, double inicioX, double finalX, ControladorMinijuego controlador) {
+    public TransicionMinijuego(Duration duration, Node coche, Node rueda1, Node rueda2, double inicioX, double finalX, ControladorMinijuego controlador) {
         setCycleDuration(duration);
         this.coche = coche;
         this.inicioX = inicioX;
         this.finalX = finalX;
-        this.controlador = controlador; 
+        this.controlador = controlador;
+
+        cargarRotacionRuedas(rueda1, rueda2, duration);
+
+    }
+
+    private void cargarRotacionRuedas(Node rueda1, Node rueda2, Duration d) {
+        rotateRueda1 = new RotateTransition();
+        rotateRueda1.setNode(rueda1);
+        rotateRueda1.setDuration(d);
+        rotateRueda1.setByAngle(360);
+        rotateRueda1.setAutoReverse(false);
+
+        rotateRueda2 = new RotateTransition();
+        rotateRueda2.setNode(rueda2);
+        rotateRueda2.setDuration(d);
+        rotateRueda2.setByAngle(360);
+        rotateRueda2.setAutoReverse(false);
+
+        rotateRueda1.play();
+        rotateRueda2.play();
     }
 
     @Override

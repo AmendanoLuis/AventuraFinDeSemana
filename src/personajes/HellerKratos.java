@@ -36,11 +36,20 @@ public class HellerKratos implements Personaje {
     }
 
     private void cargarDialogos() {
-        dialogos.put("d1", "¡Hola! Soy Heller Kratos.");
-        dialogos.put("d2", "¿Como estais chavales?");
-        dialogos.put("d3", "Vamos subid, que llegamos tarde");
-        dialogos.put("d4", "Wow, que bonitas vistas");
-        dialogos.put("d5", "¡Adios amigos!");
+        dialogos.put("d1", "Y puta la confederación hidrográfica del Guadiana !!!");
+        dialogos.put("d2", "¡¡¡Felicidades a los graduados!!! Maminha, Marx y Einabel.");
+        dialogos.put("d3", "De senderismo podemos ir a los Cahorros.");
+        dialogos.put("d4", "Pues decide tu, ¿dónde quieres ir?");
+        dialogos.put("d5", "Pues a Sierra Nevada vamos.");
+        dialogos.put("d6", "Sip vámonos, nos vemos mañana chicos.");
+        dialogos.put("d7", "Hey, buenos días, bueno ya somos seis. ¿Viene alguien más? ");
+        dialogos.put("d8", "Bueno pues nos vamos ya, subir todos al coche.");
+        dialogos.put("d9", "Bueno pues guay, partamos entonces.");
+        dialogos.put("d10", "Pues a los Cahorros vamos.");
+        dialogos.put("d11", " Sí vámonos, nos vemos mañana chicos.");
+        dialogos.put("d12", "Hey, buenos días, bueno ya somos seis. ¿Viene alguien más? ");
+        dialogos.put("d13", "Bueno pues nos vamos ya, subir todos al coche.");
+        dialogos.put("d14", "Bueno pues guay, partamos entonces.");
 
     }
 

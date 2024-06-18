@@ -13,7 +13,7 @@ import modelo.Personaje;
  *
  * @author Luis
  */
-public class CP_Salami implements Personaje {
+public class KarlMarx implements Personaje {
 
     private double dinero;
 
@@ -23,8 +23,8 @@ public class CP_Salami implements Personaje {
 
     private Map<String, String> dialogos;
 
-    public CP_Salami() {
-        nombre = "C.P Salami";
+    public KarlMarx() {
+        nombre = "Karl Marx";
         this.dialogos = new HashMap<>();
         this.poses = new HashMap<>();
         cargarDialogos();
@@ -34,21 +34,25 @@ public class CP_Salami implements Personaje {
     }
 
     private void cargarDialogos() {
-        dialogos.put("d1", "Ya ves, llevaba semanas sin dormir.");
-        dialogos.put("d2", "¿Hacemos algo este Fin de Semana para celebrarlo?");
-        dialogos.put("d3", "Ya ves, yo igual.");
-        dialogos.put("d4", "MOGUISE BLAAAAH!!! ");
-        dialogos.put("d5", "Esperad que voy con vosotros.");
-        dialogos.put("d6", "Pues ya se va haciendo tarde, yo creo que deberíamos salir ya.");
-        dialogos.put("d7", "Estoy bien, he ido antes en casa.");
-        dialogos.put("d8", "Esperad que voy con vosotros.");
+        dialogos.put("d1", "... y es por eso que es mejor el barsa que el Madrid ");
+        dialogos.put("d2", "Gracias amigo.");
+        dialogos.put("d3", "Yo preferiría ir a Sierra Nevada la verdad, que hace tiempo que no voy a la nieve.");
+        dialogos.put("d4", "VAMOOOS YEAHHH");
+        dialogos.put("d5", "Guay, ahora te hacemos bizum. Vámonos a casa que hay que descansar.");
+        dialogos.put("d6", "Venga vamos, adiós migue. Adiós Einebel.");
+        dialogos.put("d7", "Creo que Einebel se ha dormido porque no me contesta las llamadas.");
+        dialogos.put("d8", "Si, porque si no no vamos a disfrutar de Sierra Nevada.");
+        dialogos.put("d9", "Yo igual, me voy subiendo.");
+        dialogos.put("d10", "Guay, ahora te hacemos bizum. Vámonos a casa que hay que descansaaar.");
+        dialogos.put("d11", "Venga vamos, adiós Migue. Adiós Einebel.");
 
     }
 
     private void cargarPoses() {
-        poses.put("p1", "resources/salamiNormal.png");
-        poses.put("p2", "resources/salamiJocoso.png");
-        poses.put("p3", "resources/salamiSorprendido.png");
+        poses.put("p1", "resources/carlPensante.png");
+        poses.put("p2", "resources/carlNormal.png");
+        poses.put("p3", "resources/carlVacilon.png");
+        poses.put("p4", "resources/carlJocoso.png");
 
     }
 
@@ -83,5 +87,4 @@ public class CP_Salami implements Personaje {
     public double obtenerDinero() {
         return this.dinero;
     }
-
 }

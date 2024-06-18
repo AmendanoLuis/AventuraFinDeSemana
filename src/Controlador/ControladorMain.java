@@ -48,6 +48,8 @@ public class ControladorMain {
     //  Menu Sierra Nevada
     private ControladorMenuSierraNevada cMenuSn;
 
+    //  Restaurante Sierra Nevada
+    private ControladorRestauranteSierraNevada cRestSn;
     //  Menu Cahorros
     private ControladorMenuCahorros cMenuCahorros;
 
@@ -63,6 +65,8 @@ public class ControladorMain {
         this.cItems = new ControladorEleccionItems();
         this.cMinijuego = new ControladorMinijuego();
         this.cMenuSn = new ControladorMenuSierraNevada();
+        this.cRestSn = new ControladorRestauranteSierraNevada();
+
         this.cMenuCahorros = new ControladorMenuCahorros();
 
         this.primaryStage = primaryStage;
@@ -123,7 +127,10 @@ public class ControladorMain {
 
     private void mostrarEleccionItems() {
 
-        pBase.getChildren().remove(cActo1.getContenedorJuego());
+        pBase.getChildren().clear();
+
+        cItems.comprobarCaminoJugador();
+
         pBase.getChildren().add(cItems.getContenedorJuego());
         eventoCargarMinijuego();
 
@@ -132,9 +139,9 @@ public class ControladorMain {
     private void mostrarMinijuego() {
 
         actualizarStatsJugadorMinijuego();
-        comprobarCaminoJugador();
 
         cItems.mostrarReglasMinijuego();
+        cMinijuego.cambiarImagenAlerta();
 
         Optional<ButtonType> result = reglasMinijuego("LEE LAS REGLAS, DESPUÉS ME CIERRAS.");
 
@@ -146,26 +153,27 @@ public class ControladorMain {
         eventosMinijuego();
     }
 
-    private void comprobarCaminoJugador() {
-
-        Jugador jugador = Jugador.getInstanciaJugador();
-
-        if (jugador.isCahorros()) {
-            cMinijuego.getVistaM().cargarImagenesAlerta(1);
-
-        } else if (jugador.isSierraNevada()) {
-            cMinijuego.getVistaM().cargarImagenesAlerta(1);
-
-        }
-    }
-
     private void mostrarMenuSierraNevada() {
         pBase.getChildren().remove(cMinijuego.getContenedorJuego());
 
         actualizarStatsJugadorMenuSN();
 
         pBase.getChildren().add(cMenuSn.getContenedorJuego());
+        eventosMenuSierraNevada();
 
+    }
+
+    private void mostrarRestauranteSierraNevada() {
+        pBase.getChildren().clear();
+
+        actualizarStatsJugadorRestSN();
+
+        pBase.getChildren().add(cRestSn.getContenedorJuego());
+        cRestSn.iniciarEventos();
+
+        eventoVolverMenuSierraNevada(cRestSn.getBtnContinuar());
+
+        cRestSn.comprobarActividadRealizada();
     }
 
     private void mostrarMenuCahorros() {
@@ -220,7 +228,7 @@ public class ControladorMain {
             mostrarMinijuego();
 
         } else {
-            
+
         }
     }
 
@@ -231,17 +239,49 @@ public class ControladorMain {
         cMinijuego.getVistaM().getBtnJuegoTerminado().setOnAction(event -> {
             if (jugador.isCahorros()) {
                 mostrarMenuCahorros();
-                cMinijuego.getVistaM().cargarImagenesAlerta(1);
 
             } else if (jugador.isSierraNevada()) {
                 mostrarMenuSierraNevada();
-                cMinijuego.getVistaM().cargarImagenesAlerta(0);
 
             }
         });
 
     }
 
+    private void eventosMenuSierraNevada() {
+        cMenuSn.getEntrar().setOnAction(event -> 
+                paneSeleccionado((StackPane) cMenuSn.getMenuAcciones().getOwnerNode()));
+    }
+
+    protected void paneSeleccionado(StackPane pane) {
+
+        if (pane == cMenuSn.getCRestaurante()) {
+            mostrarRestauranteSierraNevada();
+
+        }
+
+        if (pane == cMenuSn.getCPaseo()) {
+
+        }
+
+        if (pane == cMenuSn.getCViaje()) {
+
+        }
+    }
+
+    private void eventoVolverMenuSierraNevada(Button btn) {
+
+        Jugador jugador = Jugador.getInstanciaJugador();
+
+        btn.setOnAction(event -> mostrarMenuSierraNevada());
+
+        if (jugador.isActividadesAcabadas()) {
+            // Hacer aparecer Pane Con flecha para ir ala animacion final y volver
+            // al inicio del juego
+        }
+    }
+
+    /*Actualizar Stats Jugador*/
     private void actualizarStatsJugadorActo1() {
         Jugador jugador = Jugador.getInstanciaJugador();
 
@@ -255,6 +295,14 @@ public class ControladorMain {
 
         cMenuSn.getvMenu().actualizarDineroJugador(jugador);
         cMenuSn.getvMenu().actualizarNombreJugador(jugador);
+
+    }
+
+    private void actualizarStatsJugadorRestSN() {
+        Jugador jugador = Jugador.getInstanciaJugador();
+
+        cRestSn.getVRestauranteSn().actualizarDineroJugador(jugador);
+        cRestSn.getVRestauranteSn().actualizarNombreJugador(jugador);
 
     }
 

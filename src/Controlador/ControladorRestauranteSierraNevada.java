@@ -4,11 +4,7 @@
  */
 package Controlador;
 
-import modelo.ConversacionesActo1;
-import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import modelo.Jugador;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -16,19 +12,30 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import modelo.Alerta;
+import modelo.ConversacionesRestauranteSn;
+import modelo.ConversacionesSierraNevada;
+import modelo.Jugador;
 import modelo.PanelHistoriayDecision;
 import vista.VistaActo1;
-import lombok.*;
-import modelo.Alerta;
+import vista.VistaRestauranteSierraNevada;
+import lombok.Data;
 
+/**
+ *
+ * @author Luis
+ */
 @Data
-public class ControladorActo1 implements PanelHistoriayDecision {
+public class ControladorRestauranteSierraNevada implements PanelHistoriayDecision {
+
+    //  Jugador
+    private static int actividadRealizada = 0;
 
     // Vista
-    private final VistaActo1 vistaActo1;
+    private VistaRestauranteSierraNevada vRestauranteSn;
 
     // Personajes
-    private ConversacionesActo1 cConver;
+    private ConversacionesRestauranteSn cConverRestSn;
     private int dialogoActual;
     private int imagenHistoriaActual;
     private StackPane cPasarDialogos;
@@ -40,6 +47,7 @@ public class ControladorActo1 implements PanelHistoriayDecision {
     private StackPane contenedorJuego;
 
     private StackPane cBotonContinuar;
+    private Button btnContinuar;
 
     private ImageView imagenesPersonaje;
 
@@ -52,52 +60,39 @@ public class ControladorActo1 implements PanelHistoriayDecision {
     private boolean cahorros = false;
     private boolean sierraNevada = false;
 
-    //  Alerta
-    private Alerta alerta;
-    private String instruccionesHistoria = "Haz click para continuar la historia, ve con cuidado, podrias tener elecciones importantes.";
-
-    public ControladorActo1() {
-        vistaActo1 = new VistaActo1();
+    public ControladorRestauranteSierraNevada() {
+        vRestauranteSn = new VistaRestauranteSierraNevada();
 
         inicializarComponentes();
-        cargarAlerta();
 
         cargarCampoAccionDialogo();
-        mostrarControlHistoria();
-    }
-
-    private void mostrarControlHistoria() {
-        alerta.mostrarAlerta("Historia", instruccionesHistoria);
     }
 
     private void inicializarComponentes() {
 
-        cConver = new ConversacionesActo1();
-        alerta = new Alerta();
+        cConverRestSn = new ConversacionesRestauranteSn();
 
         dialogoActual = 0;
         imagenHistoriaActual = 1;
 
-        cPasarDialogos = vistaActo1.getCPasarDialogos();
+        cPasarDialogos = vRestauranteSn.getCPasarDialogos();
 
-        contenedorDialogoYeleccion = vistaActo1.getContenedorDialogoyEleccion();
-        cPregunta = vistaActo1.getCPregunta();
+        btnContinuar = vRestauranteSn.getBtnContinuar();
 
-        contenedorDialogo = vistaActo1.getContenedorDialogo();
+        contenedorDialogoYeleccion = vRestauranteSn.getContenedorDialogoyEleccion();
+        cPregunta = vRestauranteSn.getCPregunta();
 
-        imagenesPersonaje = vistaActo1.getImagenPersonaje();
-        imagenesHistoria = vistaActo1.getImagenesHistoria();
+        contenedorDialogo = vRestauranteSn.getContenedorDialogo();
 
-        contenedorJuego = vistaActo1.getContenedorJuego();
+        imagenesPersonaje = vRestauranteSn.getImagenPersonaje();
+        imagenesHistoria = vRestauranteSn.getImagenesHistoria();
 
-        dialogo = vistaActo1.getDialogo();
+        contenedorJuego = vRestauranteSn.getContenedorJuego();
 
-        cBotonContinuar = vistaActo1.getCContinuar();
+        dialogo = vRestauranteSn.getDialogo();
 
-    }
+        cBotonContinuar = vRestauranteSn.getCContinuar();
 
-    private void cargarAlerta() {
-        contenedorJuego.getChildren().add(alerta.getAlerta());
     }
 
     protected void iniciarEventos() {
@@ -106,22 +101,35 @@ public class ControladorActo1 implements PanelHistoriayDecision {
 
             avanzarDialogo();
         });
-        vistaActo1.getBtnCahorros().setOnAction(event -> {
-            seleccionarDestino(1);
+        vRestauranteSn.getEleccion1().setOnAction(event -> {
+            cambiarFlujoHistoria(1);
             avanzarDialogo();
             establecerPanelDialogo();
             cargarCampoAccionDialogo();
             dialogoBase = false;
 
         });
-        vistaActo1.getBtnSierraNevada().setOnAction(event -> {
-            seleccionarDestino(2);
+        vRestauranteSn.getEleccion2().setOnAction(event -> {
+            cambiarFlujoHistoria(2);
             avanzarDialogo();
             establecerPanelDialogo();
             cargarCampoAccionDialogo();
             dialogoBase = false;
 
         });
+
+    }
+
+    protected static void comprobarActividadRealizada() {
+        Jugador jugador = Jugador.getInstanciaJugador();
+
+        int count = jugador.getContadorActividades();
+        if (actividadRealizada == 1) {
+            count += actividadRealizada;
+            actividadRealizada = 2;
+        }
+
+        jugador.setContadorActividades(count);
 
     }
 
@@ -157,7 +165,7 @@ public class ControladorActo1 implements PanelHistoriayDecision {
 
         }
 
-        if (dialogoActual == 8) {
+        if (dialogoActual == 9) {
 
             cambiarImagenHistoria();
         }
@@ -167,22 +175,22 @@ public class ControladorActo1 implements PanelHistoriayDecision {
     private void mostrarDialogo() {
         String dialogoTexto = " ";
 
-        if (dialogoBase) {
-            dialogoTexto = cConver.obtenerDialogos();
+        if (this.dialogoBase) {
+            dialogoTexto = cConverRestSn.obtenerDialogos();
 
         }
 
-        if (cahorros) {
-            dialogoTexto = cConver.obtenerDialogos();
+        if (this.cahorros) {
+            dialogoTexto = cConverRestSn.obtenerDialogos();
 
         }
-        if (sierraNevada) {
-            dialogoTexto = cConver.obtenerDialogos();
+        if (this.sierraNevada) {
+            dialogoTexto = cConverRestSn.obtenerDialogos();
 
         }
 
         if (dialogoTexto != null && !dialogoTexto.isEmpty()) {
-            dialogo.setText(dialogoTexto);
+            this.dialogo.setText(dialogoTexto);
         } else {
 
         }
@@ -192,7 +200,7 @@ public class ControladorActo1 implements PanelHistoriayDecision {
     private void mostrarPosePersonaje() {
 
         try {
-            String imagenPersonaje = cConver.obtenerPoses();
+            String imagenPersonaje = cConverRestSn.obtenerPoses();
             Image imgPersonaje = new Image(imagenPersonaje);
             if (imgPersonaje != null) {
                 imagenesPersonaje.setImage(imgPersonaje);
@@ -205,6 +213,9 @@ public class ControladorActo1 implements PanelHistoriayDecision {
             System.out.println("Error: " + e);
             cBotonContinuar.setVisible(true);
             cBotonContinuar.toFront();
+
+            actividadRealizada = 1;
+
         }
 
     }
@@ -231,7 +242,7 @@ public class ControladorActo1 implements PanelHistoriayDecision {
     @Override
     public void cambiarImagenHistoria() {
         String claveImagen = "Imagen " + imagenHistoriaActual;
-        String pathImagen = vistaActo1.getPathImagen(claveImagen);
+        String pathImagen = vRestauranteSn.getPathImagen(claveImagen);
         if (pathImagen != null && !pathImagen.isEmpty()) {
             try {
                 Image imgHistoria = new Image(pathImagen);
@@ -245,25 +256,25 @@ public class ControladorActo1 implements PanelHistoriayDecision {
         }
     }
 
-    private void seleccionarDestino(int eleccion) {
+    private void cambiarFlujoHistoria(int eleccion) {
         Jugador jugador = Jugador.getInstanciaJugador();
 
         if (eleccion == 1) {
-            jugador.seleccionarCahorros();
-            this.cahorros = true;
-            this.dialogoBase = false;
-            cConver.cargarDialogoCahorros();
 
         }
 
         if (eleccion == 2) {
-            jugador.seleccionarSierraNevada();
-            this.sierraNevada = true;
-            this.dialogoBase = false;
-            cConver.cargarDialogoSierraNevada();
+            if (cConverRestSn.isPregunta1()) {
+                cConverRestSn.cambiarPregunta1AFlujo2();
+
+            }
+
+            if (cConverRestSn.isPregunta2()) {
+                cConverRestSn.cambiarPregunta2AFlujo2();
+
+            }
 
         }
 
     }
-
 }

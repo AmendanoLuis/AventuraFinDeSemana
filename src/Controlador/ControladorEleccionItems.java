@@ -4,6 +4,7 @@
  */
 package Controlador;
 
+import items.Bocadillo;
 import items.GafasSol;
 import items.Trineo;
 import java.util.Map;
@@ -32,6 +33,7 @@ public class ControladorEleccionItems {
 
     private GafasSol gafasSol;
     private Trineo trineo;
+    private Bocadillo bocadillo;
 
     //  Nodos vista
     private VistaEleccionItems vistaItems;
@@ -43,6 +45,7 @@ public class ControladorEleccionItems {
     private StackPane contenedorJuego;
     private CheckBox item1;
     private CheckBox item2;
+    private CheckBox item3;
     private Button btnAceptarItems;
     private Button btnContinuarJuego;
 
@@ -81,8 +84,10 @@ public class ControladorEleccionItems {
         imagenItem = vistaItems.getImagenItem();
         item1 = vistaItems.getItem1();
         item2 = vistaItems.getItem2();
+        item3 = vistaItems.getItem3();
         gafasSol = new GafasSol();
         trineo = new Trineo();
+        bocadillo = new Bocadillo();
 
         //  Imagen y desc de Items
         descItem = vistaItems.getDescItem();
@@ -100,6 +105,18 @@ public class ControladorEleccionItems {
 
     }
 
+    protected void comprobarCaminoJugador() {
+        Jugador jugador = Jugador.getInstanciaJugador();
+
+        if (jugador.isCahorros()) {
+            item2.setVisible(false);
+        } else if (jugador.isSierraNevada()) {
+            item3.setVisible(false);
+
+        }
+
+    }
+
     private void guardarItemsJugador() {
         Jugador jugador = Jugador.getInstanciaJugador();
 
@@ -107,6 +124,7 @@ public class ControladorEleccionItems {
 
         String nGafas = gafasSol.getNombre();
         String nTrineo = trineo.getNombre();
+        String nBocadillo = bocadillo.getNombre();
 
         //  Dinero
         double dineroJ = cantDinero.getValue();
@@ -123,6 +141,12 @@ public class ControladorEleccionItems {
             jugador.añadirItem(trineo);
 
         }
+        if (item3.isSelected()) {
+            mensaje = mensaje + ' ' + nBocadillo;
+
+            jugador.añadirItem(bocadillo);
+
+        }
 
         alerta.mostrarAlerta("Eleccion Items", mensaje + ". Esperemos que no te falte de nada.");
 
@@ -130,7 +154,7 @@ public class ControladorEleccionItems {
 
     private void eventosBotones() {
         btnAceptarItems.setOnAction(event -> {
-            if (!item1.isSelected() && !item2.isSelected()) {
+            if (!item1.isSelected() && !item2.isSelected() && !item3.isSelected()) {
                 alerta.mostrarAlerta("Eleccion Items", "Elige al menos algo que llevarte. No vaya a ser...");
 
             } else {
@@ -141,7 +165,7 @@ public class ControladorEleccionItems {
     }
 
     public void mostrarReglasMinijuego() {
-     alerta.mostrarAlerta("REGLAS MINIJUEGO", reglasMinijuego);
+        alerta.mostrarAlerta("REGLAS MINIJUEGO", reglasMinijuego);
 
     }
 
@@ -169,6 +193,21 @@ public class ControladorEleccionItems {
                 imgItem.setImage(imagenItem.get("Trineo"));
                 descItem.setText(descTrineo);
                 System.out.println(descTrineo);
+
+            } else {
+                imgItem.setImage(null);
+                descItem.setText(null);
+            }
+        });
+        
+        item3.selectedProperty().addListener((observable, oldValue, newValue) -> {
+
+            String descBocadillo = bocadillo.getDescripcion();
+
+            if (newValue) {
+                imgItem.setImage(imagenItem.get("Bocadillo"));
+                descItem.setText(descBocadillo);
+                System.out.println(descBocadillo);
 
             } else {
                 imgItem.setImage(null);
